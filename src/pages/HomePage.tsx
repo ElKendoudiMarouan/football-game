@@ -1,18 +1,23 @@
 import React from 'react'
 import DateDisplay from '../components/DateDisplay'
 import PassingComponent from '../components/PassingComponent';
+import {RefractionComponent} from '../components/RefractionComponent';
 
 const HomePage: React.FC = () => {
     return (
         <div style={{ position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-            <h1 style={{ fontSize: '4em' }}>Hello world!</h1>
-            <h3 style={{ fontSize: '1em' }}>Passing</h3>
+            <h1 style={{ fontSize: '4em' }}>Football Game!</h1>
             <PassingComponent/>
-            <h3 style={{ fontSize: '1em' }}>Shooting</h3>
-            <h3 style={{ fontSize: '1em' }}>Refracting/loose ball</h3>
-            <h3 style={{ fontSize: '1em' }}>Tackling</h3>
-            <h3 style={{ fontSize: '1em' }}>Dribbling</h3>
-            <h3 style={{ fontSize: '1em' }}>Saving</h3>
+            <hr/>
+            <h2 style={{ fontSize: '1em' }}>Shooting</h2>
+            <hr/>
+            <RefractionComponent/>
+            <hr/>
+            <h2 style={{ fontSize: '1em' }}>Tackling</h2>
+            <hr/>
+            <h2 style={{ fontSize: '1em' }}>Dribbling</h2>
+            <hr/>
+            <h2 style={{ fontSize: '1em' }}>Saving</h2>
             <DateDisplay />
         </div>
     )

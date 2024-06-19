@@ -1,37 +1,28 @@
 import React, { useState } from 'react';
+import { PlayerSelector } from './PlayerSelector';
+import {RefractionComponent, RefractionType} from './RefractionComponent';
+import {Player, players} from '../types/types';
+import { MAX_DICE_VALUE, MIN_DICE_VALUE, rollDice} from '../utility/diceUtils';
 
-// Define Player type
-type Player = {
-    id: number;
-    name: string;
-    number: number;
-    Pace: number;
-    Shooting: number;
-    Passing: number;
-    Defense: number;
-    Control: number;
-    Head: number;
-    Resilience: number;
-};
-
-// Sample player data (You can replace this with your actual data)
-const players: Player[] = [
-    { id: 1, name: 'Player 1', number: 7, Pace: 8, Shooting: 6, Passing: 7, Defense: 5, Control: 7, Head: 6, Resilience: 8 },
-    { id: 2, name: 'Player 2', number: 10, Pace: 7, Shooting: 9, Passing: 8, Defense: 6, Control: 8, Head: 5, Resilience: 7 },
-    // Add more players as needed
-];
+const MIN_SUCCESS_RESULT = 6;
+const PASS_DISTANCE_UNIT = 6;
+const COEFF_TABLES_LENGHT = 9;
+const PASS_TURN_PENALTY = 2;
+const HEADER_TURN_PENALTY = 1;
 
 const DISTANCE_COEFFICIENTS = {
-    normal: [0, 2, 3, 4, 5, 6, 7],
-    header: [2, 3, 4, 5, 6, 7, 8],
+    normal: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+    header: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
 };
 
-const getDistanceCoefficient = (distance: number, isHeader: boolean): number => {
-    const index = Math.min(Math.floor(distance / 6), 6); // Determine the index based on distance
+const adjustDistance = (distance: number, isHeader: boolean, didTurn: boolean) =>
+    distance + (didTurn ? (isHeader ? PASS_TURN_PENALTY : HEADER_TURN_PENALTY) : 0);
+
+const getDistanceCoefficient = (distance: number, isHeader: boolean, didTurn: boolean): number => {
+    const adjustedDistance = adjustDistance(distance, isHeader, didTurn);
+    const index = Math.min(Math.floor(adjustedDistance / PASS_DISTANCE_UNIT), COEFF_TABLES_LENGHT);
     return isHeader ? DISTANCE_COEFFICIENTS.header[index] : DISTANCE_COEFFICIENTS.normal[index];
 };
-
-const rollDice = (): number => Math.floor(Math.random() * 12) + 1;
 
 type CalculationResult = {
     result: number;
@@ -39,8 +30,8 @@ type CalculationResult = {
     distanceCoeff: number;
     passSuccessful: boolean;
     refractionDistance: number;
-    refractionDirection: number;
     formula: string;
+    coeffFormula: string;
 };
 
 const calculateResult = (
@@ -50,30 +41,24 @@ const calculateResult = (
     didTurn: boolean,
     diceRoll: number
 ): CalculationResult => {
-    const distanceCoeff = getDistanceCoefficient(distance, isHeader);
-    let result;
+    const distanceCoeff = getDistanceCoefficient(distance, isHeader, didTurn);
 
-    if (isHeader) {
-        result = diceRoll + player.Head - distanceCoeff - (didTurn ? 2 : 0);
-    } else {
-        result = diceRoll + player.Passing - distanceCoeff - (didTurn ? 1 : 0);
-    }
+    const result = diceRoll + (isHeader ? player.Head : player.Passing) - distanceCoeff;
 
-    let passSuccessful = false;
+    let passSuccessful: boolean;
     let refractionDistance = 0;
-    let refractionDirection = 0;
 
-    if (diceRoll === 1) {
+    if (diceRoll === MIN_DICE_VALUE) {
         passSuccessful = false;
-    } else if (diceRoll === 12 || (!isHeader && distance <= 6)) {
+    } else if (diceRoll === MAX_DICE_VALUE || (!isHeader && distance <= 6)) {
         passSuccessful = true;
     } else {
-        passSuccessful = result > 6;
+        passSuccessful = result > MIN_SUCCESS_RESULT;
         if (!passSuccessful) {
-            refractionDistance = 6 - result;
-            refractionDirection = rollDice();
+            refractionDistance = MIN_SUCCESS_RESULT - result;
         }
     }
+    const skillValue = isHeader ? player.Head : player.Passing;
 
     return {
         result,
@@ -81,14 +66,14 @@ const calculateResult = (
         distanceCoeff,
         passSuccessful,
         refractionDistance,
-        refractionDirection,
-        formula: `${diceRoll} + ${isHeader ? player.Head : player.Passing} - ${distanceCoeff}${didTurn ? ` - ${isHeader ? 2 : 1}` : ''}`,
+        formula: `Dice Roll (${diceRoll}) +  ${isHeader ? 'Head' : 'Passing'} Skill (${skillValue}) - Distance Coefficient (${distanceCoeff})`,
+        coeffFormula: `Distance (${distance})  ${ didTurn ? `+ Changed Direction (${(isHeader ? HEADER_TURN_PENALTY : HEADER_TURN_PENALTY)})` : ''}`,
     };
 };
 
-const PassingComponent: React.FC = () => {
-    const [selectedPlayer, setSelectedPlayer] = useState<Player>(players[0]);
-    const [distance, setDistance] = useState<number>(0);
+export const PassingComponent: React.FC = () => {
+    const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(players[0]);
+    const [distance, setDistance] = useState<number>(1);
     const [isHeader, setIsHeader] = useState<boolean>(false);
     const [didTurn, setDidTurn] = useState<boolean>(false);
     const [diceRoll, setDiceRoll] = useState<number | null>(null);
@@ -101,7 +86,7 @@ const PassingComponent: React.FC = () => {
     };
 
     const handleCalculate = () => {
-        if (diceRoll !== null) {
+        if (diceRoll !== null && selectedPlayer !== null) {
             const result = calculateResult(selectedPlayer, distance, isHeader, didTurn, diceRoll);
             setCalculation(result);
         }
@@ -114,29 +99,20 @@ const PassingComponent: React.FC = () => {
             {diceRoll !== null && (
                 <>
                     <p>Dice Roll: {diceRoll}</p>
-                    {diceRoll === 1 ? (
+                    {diceRoll === MIN_DICE_VALUE ? (
                         <p>Pass Failed</p>
-                    ) : diceRoll === 12 ? (
+                    ) : diceRoll === MAX_DICE_VALUE ? (
                         <p>Pass Successful</p>
                     ) : (
                         <>
-                            <label>
-                                Player:
-                                <select
-                                    value={selectedPlayer.id}
-                                    onChange={(e) => setSelectedPlayer(players.find(p => p.id === parseInt(e.target.value)) as Player)}
-                                >
-                                    {players.map(player => (
-                                        <option key={player.id} value={player.id}>{player.name}</option>
-                                    ))}
-                                </select>
-                            </label>
+                            <PlayerSelector players={players}  disabled={calculation !== null} selectedPlayer={selectedPlayer} onSelect={setSelectedPlayer} />
                             <br />
                             <label>
                                 Distance:
                                 <input
                                     type="number"
                                     value={distance}
+                                    disabled={calculation !== null}
                                     onChange={(e) => setDistance(parseInt(e.target.value))}
                                 />
                             </label>
@@ -146,6 +122,7 @@ const PassingComponent: React.FC = () => {
                                 <input
                                     type="checkbox"
                                     checked={isHeader}
+                                    disabled={calculation !== null}
                                     onChange={(e) => setIsHeader(e.target.checked)}
                                 />
                             </label>
@@ -155,6 +132,7 @@ const PassingComponent: React.FC = () => {
                                 <input
                                     type="checkbox"
                                     checked={didTurn}
+                                    disabled={calculation !== null}
                                     onChange={(e) => setDidTurn(e.target.checked)}
                                 />
                             </label>
@@ -163,13 +141,14 @@ const PassingComponent: React.FC = () => {
                             {calculation && (
                                 <div>
                                     <h3>Result</h3>
-                                    <p>Formula: {calculation.formula} = {calculation.result}</p>
+                                    <p>Distance coefficient: {calculation.coeffFormula} =  {adjustDistance(distance, isHeader, didTurn)} → {calculation.distanceCoeff}</p>
+                                    <p>Formula: {calculation.formula} = {calculation.result} {calculation.passSuccessful ? '>' : ' ≤'} {MIN_SUCCESS_RESULT}</p>
                                     <p>Pass Successful: {calculation.passSuccessful ? 'Yes' : 'No'}</p>
                                     {!calculation.passSuccessful && (
-                                        <>
-                                            <p>Refraction Distance: {calculation.refractionDistance}</p>
-                                            <p>Refraction Direction: {calculation.refractionDirection}</p>
-                                        </>
+                                        <RefractionComponent
+                                            refractionDistance={calculation.refractionDistance}
+                                            refractionType={RefractionType.LooseBall}
+                                        />
                                     )}
                                 </div>
                             )}
