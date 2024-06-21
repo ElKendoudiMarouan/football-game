@@ -3,25 +3,30 @@ import { PlayerSelector } from './PlayerSelector';
 import {RefractionComponent, RefractionType} from './RefractionComponent';
 import {Player, players} from '../types/types';
 import { MAX_DICE_VALUE, MIN_DICE_VALUE, rollDice} from '../utility/diceUtils';
+import {clamp} from '../utility/sharedFunctions';
+
 
 const MIN_SUCCESS_RESULT = 6;
-const PASS_DISTANCE_UNIT = 6;
-const COEFF_TABLES_LENGHT = 9;
-const PASS_TURN_PENALTY = 2;
-const HEADER_TURN_PENALTY = 1;
+const NORMAL_PASS_DISTANCE_UNIT = 6;
+const HEADER_PASS_DISTANCE_UNIT = 3;
+const MAX_HEADER_PASS_DISTANCE = 12;
+const PASS_TURN_PENALTY = 1;
+const HEADER_TURN_PENALTY = 2;
 
-const DISTANCE_COEFFICIENTS = {
-    normal: [0, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    header: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-};
+const NORMAL_PASS_DISTANCE_COEFFICIENTS = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const HEADER_PASS_DISTANCE_COEFFICIENTS = [2, 3, 4, 5, 6];
 
-const adjustDistance = (distance: number, isHeader: boolean, didTurn: boolean) =>
-    distance + (didTurn ? (isHeader ? PASS_TURN_PENALTY : HEADER_TURN_PENALTY) : 0);
+const adjustDistance = (distance: number, isHeader: boolean, didTurn: boolean) => {
+    const newDistance = distance  + (didTurn ? (isHeader ? PASS_TURN_PENALTY : HEADER_TURN_PENALTY) : 0);
+    return isHeader ? Math.min(newDistance, MAX_HEADER_PASS_DISTANCE): newDistance;
+}
 
 const getDistanceCoefficient = (distance: number, isHeader: boolean, didTurn: boolean): number => {
+    const coefficients = isHeader ? NORMAL_PASS_DISTANCE_COEFFICIENTS : HEADER_PASS_DISTANCE_COEFFICIENTS;
     const adjustedDistance = adjustDistance(distance, isHeader, didTurn);
-    const index = Math.min(Math.floor(adjustedDistance / PASS_DISTANCE_UNIT), COEFF_TABLES_LENGHT);
-    return isHeader ? DISTANCE_COEFFICIENTS.header[index] : DISTANCE_COEFFICIENTS.normal[index];
+    const unit = isHeader ? HEADER_PASS_DISTANCE_UNIT : NORMAL_PASS_DISTANCE_UNIT;
+    const index = Math.min(Math.floor(adjustedDistance / unit), coefficients.length-1);
+    return coefficients[index];
 };
 
 type CalculationResult = {
@@ -41,14 +46,15 @@ const calculateResult = (
     didTurn: boolean,
     diceRoll: number
 ): CalculationResult => {
-    const distanceCoeff = getDistanceCoefficient(distance, isHeader, didTurn);
-
-    const result = diceRoll + (isHeader ? player.Head : player.Passing) - distanceCoeff;
-
     let passSuccessful: boolean;
     let refractionDistance = 0;
 
-    if (diceRoll === MIN_DICE_VALUE) {
+    const distanceCoeff = getDistanceCoefficient(distance, isHeader, didTurn);
+    const skillValue = isHeader ? player.Head : player.Passing;
+
+    const result = clamp(diceRoll + skillValue - distanceCoeff, MIN_DICE_VALUE, MAX_DICE_VALUE);
+
+    if (diceRoll === MIN_DICE_VALUE) { //todo out of closest line
         passSuccessful = false;
     } else if (diceRoll === MAX_DICE_VALUE || (!isHeader && distance <= 6)) {
         passSuccessful = true;
@@ -58,7 +64,6 @@ const calculateResult = (
             refractionDistance = MIN_SUCCESS_RESULT - result;
         }
     }
-    const skillValue = isHeader ? player.Head : player.Passing;
 
     return {
         result,

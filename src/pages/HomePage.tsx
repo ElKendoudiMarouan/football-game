@@ -2,6 +2,7 @@ import React from 'react'
 import DateDisplay from '../components/DateDisplay'
 import PassingComponent from '../components/PassingComponent';
 import {RefractionComponent} from '../components/RefractionComponent';
+import ShootingComponent from '../components/ShootingComponent';
 
 const HomePage: React.FC = () => {
     return (
@@ -9,7 +10,7 @@ const HomePage: React.FC = () => {
             <h1 style={{ fontSize: '4em' }}>Football Game!</h1>
             <PassingComponent/>
             <hr/>
-            <h2 style={{ fontSize: '1em' }}>Shooting</h2>
+                <ShootingComponent/>
             <hr/>
             <RefractionComponent/>
             <hr/>
