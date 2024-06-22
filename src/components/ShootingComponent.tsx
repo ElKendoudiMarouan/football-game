@@ -53,7 +53,7 @@ const calculateShootingResult = (
     diceRoll: number
 ) => {
     const distanceCoeff = getDistanceCoefficient(distance, isHeader, isInsideGoalZone, didTurn);
-    const skillValue = isHeader ? player.Head : player.Shooting;
+    const skillValue = isHeader ? player.Header : player.Shooting;
     const result = clamp(diceRoll + skillValue - distanceCoeff, MIN_DICE_VALUE, MAX_DICE_VALUE);
     const { shotResult, deviation } = checkOnTarget(result, goalCell);
 

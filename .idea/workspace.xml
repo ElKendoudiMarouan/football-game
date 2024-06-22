@@ -3,20 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DeflectionComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utility/charts.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PassingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PassingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RefractionComponent.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/enums.ts" afterDir="false" />
     </list>
-    <list id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="" />
+    <list id="af2fdd12-b4ee-41dd-ab94-5a6027f51e32" name="New changelist-2" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,22 +31,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/.idea/workspace.xml">
-      <ranges>
-        <range start1="4" end1="5" start2="4" end2="8" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
-        <range start1="6" end1="6" start2="9" end2="11" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
-        <range start1="7" end1="9" start2="12" end2="18" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
-        <range start1="19" end1="19" start2="28" end2="29" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
-        <range start1="32" end1="32" start2="42" end2="58" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
-        <range start1="48" end1="48" start2="74" end2="75" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
-        <range start1="53" end1="53" start2="80" end2="83" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
-        <range start1="75" end1="75" start2="105" end2="106" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
-        <range start1="79" end1="80" start2="110" end2="111" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
-        <range start1="109" end1="110" start2="140" end2="148" changelist="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -104,11 +79,12 @@
     <task active="true" id="Default" summary="Default task">
       <changelist id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="" />
       <changelist id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="" />
+      <changelist id="af2fdd12-b4ee-41dd-ab94-5a6027f51e32" name="New changelist-2" comment="" />
       <created>1718808900929</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718808900929</updated>
-      <workItem from="1718808903287" duration="52077000" />
+      <workItem from="1718808903287" duration="53192000" />
     </task>
     <task id="LOCAL-00001" summary="init intellij project">
       <created>1718808973600</created>
@@ -138,7 +114,21 @@
       <option name="project" value="LOCAL" />
       <updated>1718993094615</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add shootin component and update passing component">
+      <created>1719067133261</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1719067133261</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update shooting component and passing component and add blocking shots objects">
+      <created>1719095616376</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1719095616376</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +151,7 @@
     <MESSAGE value="add pass component" />
     <MESSAGE value="modify pass component and add refract component" />
     <MESSAGE value="add shootin component and update passing component" />
-    <option name="LAST_COMMIT_MESSAGE" value="add shootin component and update passing component" />
+    <MESSAGE value="update shooting component and passing component and add blocking shots objects" />
+    <option name="LAST_COMMIT_MESSAGE" value="update shooting component and passing component and add blocking shots objects" />
   </component>
 </project>
