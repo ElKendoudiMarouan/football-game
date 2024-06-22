@@ -2,11 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/utility/enums.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/DeflectionComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utility/charts.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PassingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PassingComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RefractionComponent.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/diceUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/diceUtils.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/sharedFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/sharedFunctions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utility/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/enums.ts" afterDir="false" />
+    </list>
+    <list id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +26,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -30,6 +40,22 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/.idea/workspace.xml">
+      <ranges>
+        <range start1="4" end1="5" start2="4" end2="8" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
+        <range start1="6" end1="6" start2="9" end2="11" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
+        <range start1="7" end1="9" start2="12" end2="18" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
+        <range start1="19" end1="19" start2="28" end2="29" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
+        <range start1="32" end1="32" start2="42" end2="58" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
+        <range start1="48" end1="48" start2="74" end2="75" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
+        <range start1="53" end1="53" start2="80" end2="83" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
+        <range start1="75" end1="75" start2="105" end2="106" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
+        <range start1="79" end1="80" start2="110" end2="111" changelist="acb7ef8e-862c-46bf-a61e-f821a9932d64" />
+        <range start1="109" end1="110" start2="140" end2="148" changelist="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -46,10 +72,14 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Mine\football-app\node_modules\typescript\lib" />
+    <property name="ts.rename.search.for.dynamic.occurrences" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Mine\football-app\src\components" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="C:\Mine\football-app\src\utility\enums.ts" />
     </key>
   </component>
   <component name="RunManager">
@@ -73,11 +103,12 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="" />
+      <changelist id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="" />
       <created>1718808900929</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718808900929</updated>
-      <workItem from="1718808903287" duration="37011000" />
+      <workItem from="1718808903287" duration="52077000" />
     </task>
     <task id="LOCAL-00001" summary="init intellij project">
       <created>1718808973600</created>

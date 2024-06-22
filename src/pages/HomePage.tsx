@@ -1,7 +1,7 @@
 import React from 'react'
 import DateDisplay from '../components/DateDisplay'
 import PassingComponent from '../components/PassingComponent';
-import {RefractionComponent} from '../components/RefractionComponent';
+import {DeflectionComponent} from '../components/DeflectionComponent';
 import ShootingComponent from '../components/ShootingComponent';
 
 const HomePage: React.FC = () => {
@@ -12,7 +12,7 @@ const HomePage: React.FC = () => {
             <hr/>
                 <ShootingComponent/>
             <hr/>
-            <RefractionComponent/>
+            <DeflectionComponent/>
             <hr/>
             <h2 style={{ fontSize: '1em' }}>Tackling</h2>
             <hr/>

@@ -5,10 +5,10 @@ import {
     MIN_DICE_VALUE,
     rollDice, SECOND_DICE_VALUE,
 } from '../utility/diceUtils';
-import { RefractionComponent, RefractionType } from './RefractionComponent';
+import { DeflectionComponent} from './DeflectionComponent';
 import { Player, players } from '../types/types';
 import { clamp } from '../utility/sharedFunctions';
-import { ShotResult } from '../utility/enums';
+import {DeflectionType, ShotResult} from '../utility/enums';
 
 const MIN_SUCCESS_RESULT = 8;
 const TOP_BAR_RESULT = 3;
@@ -55,20 +55,21 @@ const calculateShootingResult = (
     const distanceCoeff = getDistanceCoefficient(distance, isHeader, isInsideGoalZone, didTurn);
     const skillValue = isHeader ? player.Head : player.Shooting;
     const result = clamp(diceRoll + skillValue - distanceCoeff, MIN_DICE_VALUE, MAX_DICE_VALUE);
-    const shotResult = checkOnTarget(diceRoll, goalCell);
+    const { shotResult, deviation } = checkOnTarget(result, goalCell);
 
     return {
         result,
         diceRoll,
         shotResult,
         distanceCoeff,
-        formula: `Dice Roll (${diceRoll}) + ${isHeader ? 'Head' : 'Shooting'} Skill (${skillValue}) - Coefficient (${distanceCoeff})`,
+        deviation,
+        formula: `Dice Roll (${diceRoll}) + ${isHeader ? 'Header' : 'Shooting'} Skill (${skillValue}) - Coefficient (${distanceCoeff})`,
         coeffFormula: `Distance (${distance})`
     };
 };
 
 const handleDeviation = (goalCellNumber: number, deviation: number): ShotResult => {
-    const newCellNumber = goalCellNumber + (goalCellNumber >= 11 ? deviation : -deviation);
+    const newCellNumber = goalCellNumber + (goalCellNumber >= GOAL_MOUTH_CELL_NUMBERS[3].number ? deviation : -deviation);
     if (newCellNumber < RIGHT_BAR_NUMBER_CELL || newCellNumber > LEFT_BAR_NUMBER_CELL) {
         return ShotResult.GoalKick;
     } else if (newCellNumber === RIGHT_BAR_NUMBER_CELL) {
@@ -80,20 +81,21 @@ const handleDeviation = (goalCellNumber: number, deviation: number): ShotResult 
     }
 };
 
-function checkOnTarget(diceRoll: number, goalCell: string) {
+function checkOnTarget(result: number, goalCell: string) {
     let shotResult;
-    if (diceRoll < TOP_BAR_RESULT ) {
+    let deviation;
+    if (result < TOP_BAR_RESULT ) {
         shotResult = ShotResult.GoalKick;
-    } else if (diceRoll == TOP_BAR_RESULT) {
+    } else if (result == TOP_BAR_RESULT) {
         shotResult = ShotResult.TopBar;
-    } else if (diceRoll > TOP_BAR_RESULT && diceRoll < MIN_SUCCESS_RESULT) {
-        const deviation = MIN_SUCCESS_RESULT - diceRoll;
+    } else if (result > TOP_BAR_RESULT && result < MIN_SUCCESS_RESULT) {
+        deviation = MIN_SUCCESS_RESULT - result;
         const goalCellNumber = GOAL_MOUTH_CELL_NUMBERS.find(cell => cell.label === goalCell)!.number;
         shotResult = handleDeviation(goalCellNumber, deviation);
     } else {
         shotResult = ShotResult.OnTarget;
     }
-    return shotResult;
+    return { shotResult, deviation };
 }
 
 export const ShootingComponent: React.FC = () => {
@@ -120,19 +122,8 @@ export const ShootingComponent: React.FC = () => {
 
     const handleCalculate = () => {
         if (diceRoll !== null && selectedPlayer !== null) {
-            if (diceRoll === MIN_DICE_VALUE || diceRoll === SECOND_DICE_VALUE || diceRoll === MAX_DICE_VALUE) {
-                setCalculation({
-                    result: diceRoll,
-                    diceRoll,
-                    coeff: 0,
-                    shotResult: diceRoll === MAX_DICE_VALUE ? ShotResult.OnTarget : ShotResult.GoalKick,
-                    formula: `Dice Roll (${diceRoll})`,
-                    coeffFormula: ''
-                });
-            } else {
-                const result = calculateShootingResult(selectedPlayer, distance, isHeader, isInsideGoalZone, didTurn, goalCell, diceRoll);
-                setCalculation(result);
-            }
+            const result = calculateShootingResult(selectedPlayer, distance, isHeader, isInsideGoalZone, didTurn, goalCell, diceRoll);
+            setCalculation(result);
         }
     };
 
@@ -143,10 +134,10 @@ export const ShootingComponent: React.FC = () => {
             {diceRoll !== null && (
                 <>
                     <p>Dice Roll: {diceRoll}</p>
-                    {diceRoll < TOP_BAR_RESULT ? (
-                        <p>Shot Failed ({calculation.shotResult})</p>
+                    {diceRoll === MIN_DICE_VALUE || diceRoll === SECOND_DICE_VALUE  ? (
+                        <p>Shot Failed ({ShotResult.GoalKick})</p>
                     ) : diceRoll === MAX_DICE_VALUE ? (
-                        <p>Shot on target : ({calculation.shotResult})</p>
+                        <p>Shot on target : ({ShotResult.OnTarget})</p>
                     ) : (
                         <>
                             <PlayerSelector players={players} disabled={calculation !== null} selectedPlayer={selectedPlayer} onSelect={setSelectedPlayer} />
@@ -215,23 +206,23 @@ export const ShootingComponent: React.FC = () => {
                                     <h3>Result</h3>
                                     <p>Distance coefficient: {calculation.coeffFormula} = {calculation.distanceCoeff}</p>
                                     <p>Formula: {calculation.formula} = {calculation.result} {calculation.shotResult == ShotResult.OnTarget ? '≥' : '<'} {MIN_SUCCESS_RESULT}</p>
-                                    <p>Shot On Target: {calculation.shotSuccesful ? 'Yes' : 'No' } : {calculation.shotResult}</p>
-                                    { calculation.shotResult && (
+                                    <p>Shot Successful: {calculation.shotSuccesful ? 'Yes' : 'No' }, Result : {calculation.shotResult}</p>
+                                    {!calculation.shotSuccesful && (
                                         <>
-                                            <p>Deviation Result: {calculation.shotResult}</p>
+                                        {calculation.deviation &&  (<p>Deviation: {calculation.deviation}</p>)}
                                             {calculation.shotResult === ShotResult.RightBar && (
-                                                <RefractionComponent
-                                                    refractionType={RefractionType.RightBar}
+                                                <DeflectionComponent
+                                                    deflectionType={DeflectionType.RightBar}
                                                 />
                                             )}
                                             {calculation.shotResult === ShotResult.LeftBar && (
-                                                <RefractionComponent
-                                                    refractionType={RefractionType.LeftBar}
+                                                <DeflectionComponent
+                                                    deflectionType={DeflectionType.LeftBar}
                                                 />
                                             )}
                                             {calculation.shotResult === ShotResult.TopBar && (
-                                                <RefractionComponent
-                                                    refractionType={RefractionType.TopBar}
+                                                <DeflectionComponent
+                                                    deflectionType={DeflectionType.TopBar}
                                                 />
                                             )}
                                         </>

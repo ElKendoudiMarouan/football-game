@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { PlayerSelector } from './PlayerSelector';
-import {RefractionComponent, RefractionType} from './RefractionComponent';
+import {DeflectionComponent} from './DeflectionComponent';
 import {Player, players} from '../types/types';
 import { MAX_DICE_VALUE, MIN_DICE_VALUE, rollDice} from '../utility/diceUtils';
 import {clamp} from '../utility/sharedFunctions';
+import {DeflectionType} from '../utility/enums';
 
 
 const MIN_SUCCESS_RESULT = 6;
@@ -34,7 +35,7 @@ type CalculationResult = {
     diceRoll: number;
     distanceCoeff: number;
     passSuccessful: boolean;
-    refractionDistance: number;
+    deflectionDistance: number;
     formula: string;
     coeffFormula: string;
 };
@@ -47,10 +48,10 @@ const calculateResult = (
     diceRoll: number
 ): CalculationResult => {
     let passSuccessful: boolean;
-    let refractionDistance = 0;
+    let deflectionDistance = 0;
 
     const distanceCoeff = getDistanceCoefficient(distance, isHeader, didTurn);
-    const skillValue = isHeader ? player.Head : player.Passing;
+    const skillValue = isHeader ? player.Header : player.Passing;
 
     const result = clamp(diceRoll + skillValue - distanceCoeff, MIN_DICE_VALUE, MAX_DICE_VALUE);
 
@@ -61,7 +62,7 @@ const calculateResult = (
     } else {
         passSuccessful = result > MIN_SUCCESS_RESULT;
         if (!passSuccessful) {
-            refractionDistance = MIN_SUCCESS_RESULT - result;
+            deflectionDistance = MIN_SUCCESS_RESULT - result;
         }
     }
 
@@ -70,7 +71,7 @@ const calculateResult = (
         diceRoll,
         distanceCoeff,
         passSuccessful,
-        refractionDistance,
+        deflectionDistance: deflectionDistance,
         formula: `Dice Roll (${diceRoll}) +  ${isHeader ? 'Head' : 'Passing'} Skill (${skillValue}) - Distance Coefficient (${distanceCoeff})`,
         coeffFormula: `Distance (${distance})  ${ didTurn ? `+ Changed Direction (${(isHeader ? HEADER_TURN_PENALTY : HEADER_TURN_PENALTY)})` : ''}`,
     };
@@ -150,9 +151,9 @@ export const PassingComponent: React.FC = () => {
                                     <p>Formula: {calculation.formula} = {calculation.result} {calculation.passSuccessful ? '>' : ' ≤'} {MIN_SUCCESS_RESULT}</p>
                                     <p>Pass Successful: {calculation.passSuccessful ? 'Yes' : 'No'}</p>
                                     {!calculation.passSuccessful && (
-                                        <RefractionComponent
-                                            refractionDistance={calculation.refractionDistance}
-                                            refractionType={RefractionType.LooseBall}
+                                        <DeflectionComponent
+                                            deflectionDistance={calculation.deflectionDistance}
+                                            deflectionType={DeflectionType.LooseBall}
                                         />
                                     )}
                                 </div>
