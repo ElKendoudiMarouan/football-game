@@ -19,15 +19,15 @@ export enum ShotResult {
 
 export enum DeflectionResult {
     Out = 'Out of closest line',
-    TopLeft = 'Top Left',
-    Top = 'Top',
-    TopRight = 'Top Right',
-    Left = 'Left',
-    NoDeflection = 'No deflection (distance 0)',
-    Right = 'Right',
-    BottomLeft = 'Bottom Left',
-    Bottom = 'Bottom',
-    BottomRight = 'Bottom Right',
+    TopLeft = 'Top Left (Cell 3)',
+    Top = 'Top (Cell 4)',
+    TopRight = 'Top Right (Cell 5)',
+    Left = 'Left (Cell 6)',
+    NoDeflection = 'No deflection (Cell 7)',
+    Right = 'Right (Cell 8)',
+    BottomLeft = 'Bottom Left (Cell 9)',
+    Bottom = 'Bottom (Cell 10)',
+    BottomRight = 'Bottom Right (Cell 11)',
     Corner = 'Corner',
     Goal = 'Goal',
 }
@@ -40,7 +40,8 @@ export enum DeflectionType {
 }
 
 
-export enum BlockResultType {
+export enum OutcomeResultType {
+    //Block
     HandBall = "Hand Ball",
     LossOfBalance = "Loss of Balance",
     Injury = "Injury",
@@ -52,5 +53,13 @@ export enum BlockResultType {
     BallToGoalkeeper = "Ball to Goalkeeper",
     ControlledBall = "Controlled Ball",
     GetAction = 'Gain Action Token',
+
+    //FOUL
     Failed = 'Failed',
+    RedCard = 'Red Card',
+    YellowCard = 'Yellow Card',
+    Foul = 'Foul',
+    Penalty = 'Penalty',
+    FreeKick = 'Free Kick',
+    NoFoul = 'No Foul',
 }

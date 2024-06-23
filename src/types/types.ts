@@ -1,4 +1,4 @@
-import {BlockResultType, PlayerStat} from '../utility/enums';
+import {OutcomeResultType, PlayerStat} from './enums';
 
 export type Player = {
     id: number;
@@ -19,14 +19,14 @@ export const players: Player[] = [
     // Add more players as needed
 ];
 
-interface BlockResult {
-    type: BlockResultType;
+interface OutcomeResult {
+    type: OutcomeResultType;
     threshold?: number;
     statName?: PlayerStat;
 }
 
-export interface BlockResultChartElement {
+export interface OutcomeChartElement {
     title: string;
     text: string;
-    results: BlockResult[];
+    results: OutcomeResult[];
 }

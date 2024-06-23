@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { PlayerSelector } from './PlayerSelector';
-import {DeflectionComponent} from './DeflectionComponent';
+import {DeflectionComponent} from './outcomes/DeflectionComponent';
 import {Player, players} from '../types/types';
 import { MAX_DICE_VALUE, MIN_DICE_VALUE, rollDice} from '../utility/diceUtils';
-import {clamp} from '../utility/sharedFunctions';
-import {DeflectionType} from '../utility/enums';
-
+import {clampDiced} from '../utility/sharedFunctions';
+import {DeflectionType} from '../types/enums';
 
 const MIN_SUCCESS_RESULT = 6;
 const NORMAL_PASS_DISTANCE_UNIT = 6;
@@ -23,7 +22,7 @@ const adjustDistance = (distance: number, isHeader: boolean, didTurn: boolean) =
 }
 
 const getDistanceCoefficient = (distance: number, isHeader: boolean, didTurn: boolean): number => {
-    const coefficients = isHeader ? NORMAL_PASS_DISTANCE_COEFFICIENTS : HEADER_PASS_DISTANCE_COEFFICIENTS;
+    const coefficients = isHeader ? HEADER_PASS_DISTANCE_COEFFICIENTS : NORMAL_PASS_DISTANCE_COEFFICIENTS;
     const adjustedDistance = adjustDistance(distance, isHeader, didTurn);
     const unit = isHeader ? HEADER_PASS_DISTANCE_UNIT : NORMAL_PASS_DISTANCE_UNIT;
     const index = Math.min(Math.floor(adjustedDistance / unit), coefficients.length-1);
@@ -47,23 +46,16 @@ const calculateResult = (
     didTurn: boolean,
     diceRoll: number
 ): CalculationResult => {
-    let passSuccessful: boolean;
     let deflectionDistance = 0;
 
     const distanceCoeff = getDistanceCoefficient(distance, isHeader, didTurn);
     const skillValue = isHeader ? player.Header : player.Passing;
 
-    const result = clamp(diceRoll + skillValue - distanceCoeff, MIN_DICE_VALUE, MAX_DICE_VALUE);
+    const result = clampDiced(diceRoll + skillValue - distanceCoeff);
 
-    if (diceRoll === MIN_DICE_VALUE) { //todo out of closest line
-        passSuccessful = false;
-    } else if (diceRoll === MAX_DICE_VALUE || (!isHeader && distance <= 6)) {
-        passSuccessful = true;
-    } else {
-        passSuccessful = result > MIN_SUCCESS_RESULT;
-        if (!passSuccessful) {
-            deflectionDistance = MIN_SUCCESS_RESULT - result;
-        }
+    const passSuccessful = result >= MIN_SUCCESS_RESULT;
+    if (!passSuccessful) {
+        deflectionDistance = MIN_SUCCESS_RESULT - result;
     }
 
     return {
@@ -72,8 +64,8 @@ const calculateResult = (
         distanceCoeff,
         passSuccessful,
         deflectionDistance: deflectionDistance,
-        formula: `Dice Roll (${diceRoll}) +  ${isHeader ? 'Head' : 'Passing'} Skill (${skillValue}) - Distance Coefficient (${distanceCoeff})`,
-        coeffFormula: `Distance (${distance})  ${ didTurn ? `+ Changed Direction (${(isHeader ? HEADER_TURN_PENALTY : HEADER_TURN_PENALTY)})` : ''}`,
+        formula: `Dice Roll (${diceRoll}) +  ${isHeader ? 'Head' : 'Passing'} Skill (${skillValue}) - Distance Coefficient (${distanceCoeff}) = ${result} ${passSuccessful ? '≥' : ' <'} ${MIN_SUCCESS_RESULT}`,
+        coeffFormula: `Distance (${distance})  ${ didTurn ? `+ Changed Direction (${(isHeader ? HEADER_TURN_PENALTY : HEADER_TURN_PENALTY)}) = ${adjustDistance(distance, isHeader, didTurn)} → Coefficient (${distanceCoeff})` : ''}`,
     };
 };
 
@@ -101,18 +93,18 @@ export const PassingComponent: React.FC = () => {
     return (
         <div>
             <h2>Passing Component</h2>
+            <PlayerSelector players={players}  disabled={calculation !== null} selectedPlayer={selectedPlayer} onSelect={setSelectedPlayer} />
+            <br/>
             <button onClick={handleRollDice}>Roll Dice</button>
             {diceRoll !== null && (
                 <>
                     <p>Dice Roll: {diceRoll}</p>
                     {diceRoll === MIN_DICE_VALUE ? (
                         <p>Pass Failed</p>
-                    ) : diceRoll === MAX_DICE_VALUE ? (
+                    ) : diceRoll === MAX_DICE_VALUE  ? (
                         <p>Pass Successful</p>
                     ) : (
                         <>
-                            <PlayerSelector players={players}  disabled={calculation !== null} selectedPlayer={selectedPlayer} onSelect={setSelectedPlayer} />
-                            <br />
                             <label>
                                 Distance:
                                 <input
@@ -147,8 +139,8 @@ export const PassingComponent: React.FC = () => {
                             {calculation && (
                                 <div>
                                     <h3>Result</h3>
-                                    <p>Distance coefficient: {calculation.coeffFormula} =  {adjustDistance(distance, isHeader, didTurn)} → {calculation.distanceCoeff}</p>
-                                    <p>Formula: {calculation.formula} = {calculation.result} {calculation.passSuccessful ? '>' : ' ≤'} {MIN_SUCCESS_RESULT}</p>
+                                    <p>Distance coefficient Formula: {calculation.coeffFormula}</p>
+                                    <p>Passing Formula: {calculation.formula}</p>
                                     <p>Pass Successful: {calculation.passSuccessful ? 'Yes' : 'No'}</p>
                                     {!calculation.passSuccessful && (
                                         <DeflectionComponent

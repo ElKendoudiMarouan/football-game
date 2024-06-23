@@ -2,9 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/generic/Accordion.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/outcomes/FoulComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/outcomes/HeadedClearanceComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/outcomes/InjuryComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/outcomes/LossOfBalanceComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/records/blockOutcomes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/records/foulOutcomes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DeflectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/DeflectionComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PassingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PassingComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PlayerSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PlayerSelector.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/main.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/main.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utility/charts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/records/deflectionOutcomes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utility/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/enums.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utility/sharedFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/sharedFunctions.ts" afterDir="false" />
     </list>
     <list id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="" />
     <list id="af2fdd12-b4ee-41dd-ab94-5a6027f51e32" name="New changelist-2" comment="" />
@@ -44,17 +60,24 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/records" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Mine\football-app\node_modules\typescript\lib" />
     <property name="ts.rename.search.for.dynamic.occurrences" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Mine\football-app\src\records" />
       <recent name="C:\Mine\football-app\src\components" />
     </key>
     <key name="es6.move.members.recent.items">
+      <recent name="C:\Mine\football-app\src\records\deflectionOutcomes.ts" />
       <recent name="C:\Mine\football-app\src\utility\enums.ts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Mine\football-app\src\components\outcomes" />
+      <recent name="C:\Mine\football-app\src\types" />
+      <recent name="C:\Mine\football-app\src\records" />
     </key>
   </component>
   <component name="RunManager">
@@ -84,7 +107,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718808900929</updated>
-      <workItem from="1718808903287" duration="53192000" />
+      <workItem from="1718808903287" duration="72377000" />
     </task>
     <task id="LOCAL-00001" summary="init intellij project">
       <created>1718808973600</created>
@@ -128,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1719095616376</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add blocking component">
+      <created>1719096699835</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1719096699835</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,6 +182,7 @@
     <MESSAGE value="modify pass component and add refract component" />
     <MESSAGE value="add shootin component and update passing component" />
     <MESSAGE value="update shooting component and passing component and add blocking shots objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="update shooting component and passing component and add blocking shots objects" />
+    <MESSAGE value="add blocking component" />
+    <option name="LAST_COMMIT_MESSAGE" value="add blocking component" />
   </component>
 </project>

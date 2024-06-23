@@ -4,7 +4,7 @@ import { Player } from '../types/types';
 type PlayerSelectorProps = {
     players: Player[];
     selectedPlayer: Player | null;
-    disabled: boolean;
+    disabled?: boolean;
     onSelect: (player: Player) => void;
 };
 
