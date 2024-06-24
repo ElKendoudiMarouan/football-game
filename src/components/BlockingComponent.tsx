@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { PlayerSelector } from './PlayerSelector';
+import { PlayerSelector } from './generic/PlayerSelector';
 import { rollDice } from '../utility/diceUtils';
-import { players, Player, OutcomeChartElement } from '../types/types';
+import { FieldPlayer, players, OutcomeChartElement } from '../types/types';
 import { BLOCK_OUTCOMES } from '../records/blockOutcomes';
-import {DeflectionComponent} from './outcomes/DeflectionComponent';
-import {OutcomeResultType, DeflectionType} from '../types/enums';
-import {clampDiced} from '../utility/sharedFunctions';
-import {LossOfBalanceComponent} from './outcomes/LossOfBalanceComponent';
-import {InjuryComponent} from './outcomes/InjuryComponent';
-import {HeadedClearanceComponent} from './outcomes/HeadedClearanceComponent';
+import { DeflectionComponent } from './outcomes/DeflectionComponent';
+import { OutcomeResultType, DeflectionType } from '../types/enums';
+import { clampDiced } from '../utility/sharedFunctions';
+import { LossOfBalanceComponent } from './outcomes/LossOfBalanceComponent';
+import { InjuryComponent } from './outcomes/InjuryComponent';
+import { HeadedClearanceComponent } from './outcomes/HeadedClearanceComponent';
 import FoulComponent from './outcomes/FoulComponent';
 
 type BlockingComponentProps = {
-    attacker?: Player;
+    attacker?: FieldPlayer;
 };
 
 type BlockingResult = {
@@ -21,7 +21,7 @@ type BlockingResult = {
     formula: string | null,
 }
 
-const calculateBlockResult = (defender: Player, attacker: Player, diceRoll: number): BlockingResult => {
+const calculateBlockResult = (defender: FieldPlayer, attacker: FieldPlayer, diceRoll: number): BlockingResult => {
     if (diceRoll === 1 || diceRoll === 12) {
         return {
             chartElement: BLOCK_OUTCOMES[diceRoll],
@@ -42,8 +42,8 @@ const calculateBlockResult = (defender: Player, attacker: Player, diceRoll: numb
 };
 
 export const BlockingComponent: React.FC<BlockingComponentProps> = ({ attacker }) => {
-    const [selectedDefender, setSelectedDefender] = useState<Player>(players[0]);
-    const [selectedAttacker, setSelectedAttacker] = useState<Player | null>(attacker || players[1]);
+    const [selectedDefender, setSelectedDefender] = useState<FieldPlayer>(players[0]);
+    const [selectedAttacker, setSelectedAttacker] = useState<FieldPlayer | null>(attacker || players[1]);
     const [blockResult, setBlockResult] = useState<BlockingResult | null>(null);
     const [diceRoll, setDiceRoll] = useState<number | null>(null);
 
@@ -82,7 +82,7 @@ export const BlockingComponent: React.FC<BlockingComponentProps> = ({ attacker }
                             case OutcomeResultType.LossOfBalance:
                                 return <LossOfBalanceComponent key={index} defender={selectedDefender!} threshold={result.threshold!} />;
                             case OutcomeResultType.Injury:
-                                return <InjuryComponent key={index} defender={selectedDefender!} threshold={result.threshold!} />;
+                                return <InjuryComponent key={index} player={selectedDefender!} threshold={result.threshold!} />;
                             case OutcomeResultType.HeadedClearance:
                                 return <HeadedClearanceComponent key={index} defender={selectedDefender!} threshold={result.threshold!} />;
                             case OutcomeResultType.Deflection:

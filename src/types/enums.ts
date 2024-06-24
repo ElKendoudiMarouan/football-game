@@ -6,6 +6,8 @@ export enum PlayerStat {
     Dribble = "Dribble",
     Header = "Header",
     Physique = "Physique",
+    Saving = "Saving",
+    Handling = "Handling",
 }
 
 export enum ShotResult {
@@ -41,20 +43,22 @@ export enum DeflectionType {
 
 
 export enum OutcomeResultType {
-    //Block
-    HandBall = "Hand Ball",
-    LossOfBalance = "Loss of Balance",
+    //Generic
     Injury = "Injury",
-    BallToShooter = "Ball to Shooter",
     Corner = "Corner",
-    ThrowIn = "ThrowIn",
-    HeadedClearance = "Headed Clearance",
     Deflection =  "Deflection",
-    BallToGoalkeeper = "Ball to Goalkeeper",
-    ControlledBall = "Controlled Ball",
+    ThrowIn = "ThrowIn",
+    LossOfBalance = "Loss of Balance",
     GetAction = 'Gain Action Token',
 
-    //FOUL
+    //Block
+    HandBall = "Hand Ball",
+    BallToShooter = "Ball to Shooter",
+    HeadedClearance = "Headed Clearance",
+    BallToGoalkeeper = "Ball to Goalkeeper",
+    ControlledBall = "Controlled Ball",
+
+    //Foul
     Failed = 'Failed',
     RedCard = 'Red Card',
     YellowCard = 'Yellow Card',
@@ -62,4 +66,9 @@ export enum OutcomeResultType {
     Penalty = 'Penalty',
     FreeKick = 'Free Kick',
     NoFoul = 'No Foul',
+
+    //Save
+    Goal = 'Goal',
+    Save = 'Save',
+    Catch = 'Catch',
 }

@@ -5,7 +5,8 @@ import ShootingComponent from '../ShootingComponent';
 import {DeflectionComponent} from '../outcomes/DeflectionComponent';
 import BlockingComponent from '../BlockingComponent';
 import FoulComponent from '../outcomes/FoulComponent';
-import {DeflectionType} from '../../types/enums'; // Assuming you have your SASS styles in this file
+import {DeflectionType} from '../../types/enums';
+import {SavingComponent} from '../SavingComponent'; // Assuming you have your SASS styles in this file
 
 type AccordionProps = {
     title?: string;
@@ -42,6 +43,7 @@ const AccordionGroup = () => {
         { title: 'Shooting', content: <ShootingComponent/> },
         { title: 'Deflection', content: <DeflectionComponent/> },
         { title: 'Blocking', content: <BlockingComponent/> },
+        { title: 'Saving', content: <SavingComponent/> },
         { title: 'Foul', content: <FoulComponent/> },
     ];
 

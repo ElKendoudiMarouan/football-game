@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PlayerSelector } from '../PlayerSelector';
+import { PlayerSelector } from '../generic/PlayerSelector';
 import { rollDice } from '../../utility/diceUtils';
 import { players, Player, OutcomeChartElement } from '../../types/types';
 import { FOUL_OUTCOMES } from '../../records/foulOutcomes';

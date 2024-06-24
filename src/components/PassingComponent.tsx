@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { PlayerSelector } from './PlayerSelector';
+import { PlayerSelector } from './generic/PlayerSelector';
 import {DeflectionComponent} from './outcomes/DeflectionComponent';
-import {Player, players} from '../types/types';
+import {FieldPlayer, Player, players} from '../types/types';
 import { MAX_DICE_VALUE, MIN_DICE_VALUE, rollDice} from '../utility/diceUtils';
 import {clampDiced} from '../utility/sharedFunctions';
 import {DeflectionType} from '../types/enums';
@@ -70,7 +70,7 @@ const calculateResult = (
 };
 
 export const PassingComponent: React.FC = () => {
-    const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(players[0]);
+    const [selectedPlayer, setSelectedPlayer] = useState<FieldPlayer | null>(players[0]);
     const [distance, setDistance] = useState<number>(1);
     const [isHeader, setIsHeader] = useState<boolean>(false);
     const [didTurn, setDidTurn] = useState<boolean>(false);

@@ -2,28 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/generic/Accordion.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/outcomes/FoulComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/outcomes/HeadedClearanceComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/outcomes/InjuryComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/outcomes/LossOfBalanceComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/records/blockOutcomes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/records/foulOutcomes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SavingComponent.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/generic/GoalKeeperSelector.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/records/savingOutcomes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/DeflectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/DeflectionComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/PassingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PassingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PlayerSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PlayerSelector.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PlayerSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/PlayerSelector.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/main.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/main.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/generic/Accordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/Accordion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/outcomes/FoulComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/FoulComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/outcomes/InjuryComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/InjuryComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/enums.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/charts.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/records/deflectionOutcomes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/enums.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/sharedFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/sharedFunctions.ts" afterDir="false" />
     </list>
     <list id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="" />
-    <list id="af2fdd12-b4ee-41dd-ab94-5a6027f51e32" name="New changelist-2" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,14 +53,16 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/records" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/generic" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Mine\football-app\node_modules\typescript\lib" />
     <property name="ts.rename.search.for.dynamic.occurrences" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Mine\football-app\src\components\generic" />
       <recent name="C:\Mine\football-app\src\records" />
       <recent name="C:\Mine\football-app\src\components" />
     </key>
@@ -75,6 +71,8 @@
       <recent name="C:\Mine\football-app\src\utility\enums.ts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Mine\football-app\src\components\generic" />
+      <recent name="C:\Mine\football-app\src\components" />
       <recent name="C:\Mine\football-app\src\components\outcomes" />
       <recent name="C:\Mine\football-app\src\types" />
       <recent name="C:\Mine\football-app\src\records" />
@@ -102,12 +100,12 @@
     <task active="true" id="Default" summary="Default task">
       <changelist id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="" />
       <changelist id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="" />
-      <changelist id="af2fdd12-b4ee-41dd-ab94-5a6027f51e32" name="New changelist-2" comment="" />
       <created>1718808900929</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718808900929</updated>
-      <workItem from="1718808903287" duration="72377000" />
+      <workItem from="1718808903287" duration="83398000" />
+      <workItem from="1719219583211" duration="1251000" />
     </task>
     <task id="LOCAL-00001" summary="init intellij project">
       <created>1718808973600</created>
@@ -158,7 +156,21 @@
       <option name="project" value="LOCAL" />
       <updated>1719096699835</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Add accordion and outcome components + code refactoring +">
+      <created>1719159047121</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1719159047121</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix add goalkeeper">
+      <created>1719168174687</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1719168174687</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,6 +195,8 @@
     <MESSAGE value="add shootin component and update passing component" />
     <MESSAGE value="update shooting component and passing component and add blocking shots objects" />
     <MESSAGE value="add blocking component" />
-    <option name="LAST_COMMIT_MESSAGE" value="add blocking component" />
+    <MESSAGE value="Add accordion and outcome components + code refactoring +" />
+    <MESSAGE value="fix add goalkeeper" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix add goalkeeper" />
   </component>
 </project>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { PlayerSelector } from './PlayerSelector';
+import { PlayerSelector } from './generic/PlayerSelector';
 import {
     MAX_DICE_VALUE,
     MIN_DICE_VALUE,
     rollDice, SECOND_DICE_VALUE,
 } from '../utility/diceUtils';
 import { DeflectionComponent} from './outcomes/DeflectionComponent';
-import { Player, players } from '../types/types';
+import {FieldPlayer, players} from '../types/types';
 import {DeflectionType, ShotResult} from '../types/enums';
 import {clampDiced} from '../utility/sharedFunctions';
 
@@ -44,7 +44,7 @@ const getDistanceCoefficient = (distance: number, isHeader: boolean, isInsideGoa
 };
 
 const calculateShootingResult = (
-    player: Player,
+    player: FieldPlayer,
     distance: number,
     isHeader: boolean,
     isInsideGoalZone: boolean,
@@ -104,7 +104,7 @@ function checkOnTarget(result: number, goalCell: string) {
 }
 
 export const ShootingComponent: React.FC = () => {
-    const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(players[0]);
+    const [selectedPlayer, setSelectedPlayer] = useState<FieldPlayer | null>(players[0]);
     const [distance, setDistance] = useState<number>(10);
     const [isHeader, setIsHeader] = useState<boolean>(false);
     const [isInsideGoalZone, setIsInsideGoalZone] = useState<boolean>(false);
