@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import { ROUTES } from './resources/routes-constants'
 import './styles/main.sass'
+import PlayerSelectionUIComponent from './components/ui/PlayerSelectionUIComponent';
 
 const RootComponent: React.FC = () => {
     return (
@@ -11,6 +12,7 @@ const RootComponent: React.FC = () => {
             <Routes>
                 <Route path="*" element={<NotFoundPage />} />
                 <Route path={ROUTES.HOMEPAGE_ROUTE} element={<HomePage />} />
+                <Route path={ROUTES.PLAYER_SELECTOR_ROUTE} element={<PlayerSelectionUIComponent />} />
             </Routes>
         </Router>
     )

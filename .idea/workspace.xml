@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="">
+    <list default="true" id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="add out of bound, change selector, add accordeon, add last player touching ball">
       <change afterPath="$PROJECT_DIR$/src/components/ui/PlayerSelectionUIComponent.scss" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/components/ui/PlayerSelectionUIComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/RootComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/RootComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SavingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SavingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/generic/GoalKeeperSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/GoalKeeperSelector.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/generic/PlayerSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/PlayerSelector.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/outcomes/DeflectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/DeflectionComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/outcomes/FoulComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/FoulComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/outcomes/OutOfBoundsBallComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/OutOfBoundsBallComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/records/blockOutcomes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/records/blockOutcomes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/resources/routes-constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/routes-constants.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/enums.ts" afterDir="false" />
     </list>
     <list id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +105,7 @@
       <workItem from="1719664989048" duration="18711000" />
       <workItem from="1719822069190" duration="1801000" />
       <workItem from="1719911806373" duration="572000" />
-      <workItem from="1720786896946" duration="21074000" />
+      <workItem from="1720786896946" duration="29640000" />
     </task>
     <task id="LOCAL-00001" summary="init intellij project">
       <created>1718808973600</created>
@@ -194,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1720804421510</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="fix calculation buttons disabling problems">
+      <created>1720816591537</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1720816591537</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +220,7 @@
     <MESSAGE value="fix add goalkeeper" />
     <MESSAGE value="add saving component and chart and field player and goalkeeper types" />
     <MESSAGE value="add out of bound, change selector, add accordeon, add last player touching ball" />
-    <option name="LAST_COMMIT_MESSAGE" value="add out of bound, change selector, add accordeon, add last player touching ball" />
+    <MESSAGE value="fix calculation buttons disabling problems" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix calculation buttons disabling problems" />
   </component>
 </project>
