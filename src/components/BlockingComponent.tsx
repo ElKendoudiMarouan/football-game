@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PlayerSelector } from './generic/PlayerSelector';
 import { rollDice } from '../utility/diceUtils';
-import { FieldPlayer, players, OutcomeChartElement } from '../types/types';
+import { FieldPlayer, OutcomeChartElement } from '../types/types';
 import { BLOCK_OUTCOMES } from '../records/blockOutcomes';
 import { DeflectionComponent } from './outcomes/DeflectionComponent';
 import { OutcomeResultType, DeflectionType } from '../types/enums';
@@ -42,8 +42,8 @@ const calculateBlockResult = (defender: FieldPlayer, attacker: FieldPlayer, dice
 };
 
 export const BlockingComponent: React.FC<BlockingComponentProps> = ({ attacker }) => {
-    const [selectedDefender, setSelectedDefender] = useState<FieldPlayer>(players[0]);
-    const [selectedAttacker, setSelectedAttacker] = useState<FieldPlayer | null>(attacker || players[1]);
+    const [selectedDefender, setSelectedDefender] = useState<FieldPlayer | null>(null);
+    const [selectedAttacker, setSelectedAttacker] = useState<FieldPlayer | null>(attacker || null);
     const [blockResult, setBlockResult] = useState<BlockingResult | null>(null);
     const [diceRoll, setDiceRoll] = useState<number | null>(null);
 
@@ -61,9 +61,9 @@ export const BlockingComponent: React.FC<BlockingComponentProps> = ({ attacker }
     return (
         <div>
             <h2>Blocking Component</h2>
-            <PlayerSelector players={players} selectedPlayer={selectedDefender} onSelect={setSelectedDefender} disabled={blockResult !== null}/>
+            <PlayerSelector text={'Select Blocker'} selectedPlayer={selectedDefender} onSelect={setSelectedDefender} disabled={blockResult !== null}/>
             {!attacker && (
-                <PlayerSelector players={players} selectedPlayer={selectedAttacker} onSelect={setSelectedAttacker} disabled={blockResult !== null}/>
+                <PlayerSelector text={'Select Shooter'} selectedPlayer={selectedAttacker} onSelect={setSelectedAttacker} disabled={blockResult !== null}/>
             )}
             <br/>
             <button onClick={handleRollDice}>Roll Dice</button>
@@ -78,15 +78,15 @@ export const BlockingComponent: React.FC<BlockingComponentProps> = ({ attacker }
                     {blockResult.chartElement.results.map((result, index) => {
                         switch (result.type) {
                             case OutcomeResultType.HandBall:
-                                return <FoulComponent key={index} player={selectedDefender} isInsideGoalZone={true}/> //TODO: change this when adding zones
+                                return <FoulComponent key={index} player={selectedDefender!} isInsideGoalZone={true}/> //TODO: change this when adding zones
                             case OutcomeResultType.LossOfBalance:
                                 return <LossOfBalanceComponent key={index} defender={selectedDefender!} threshold={result.threshold!} />;
                             case OutcomeResultType.Injury:
                                 return <InjuryComponent key={index} player={selectedDefender!} threshold={result.threshold!} />;
                             case OutcomeResultType.HeadedClearance:
-                                return <HeadedClearanceComponent key={index} defender={selectedDefender!} threshold={result.threshold!} />;
+                                return <HeadedClearanceComponent key={index} defender={selectedDefender!} threshold={result.threshold!} lastPlayerTouchingBall={selectedDefender!}/>;
                             case OutcomeResultType.Deflection:
-                                return <DeflectionComponent deflectionType={DeflectionType.LooseBall} />;
+                                return <DeflectionComponent key={index} deflectionType={DeflectionType.LooseBall} lastPlayerTouchingBall={selectedDefender!}/>;
                             case OutcomeResultType.Failed:
                                 return <p key={index}>The shot passed the defender and is reaching the goal.</p>;
                             case OutcomeResultType.GetAction:

@@ -1,23 +1,42 @@
-import React from 'react';
-import {Goalkeeper} from '../../types/types';
+import React, { useEffect, useState } from 'react';
+import { Goalkeeper, Team } from '../../types/types';
+import { TeamSelector } from './TeamSelector';
 
 type GoalkeeperSelectorProps = {
-    goalkeepers: Goalkeeper[];
+    text: string;
     selectedGoalkeeper: Goalkeeper | null;
     disabled?: boolean;
-    onSelect: (goalkeeper: Goalkeeper) => void;
+    onSelect: (goalkeeper: Goalkeeper | null) => void;
 };
 
-export const GoalkeeperSelector: React.FC<GoalkeeperSelectorProps> = ({ goalkeepers, selectedGoalkeeper, disabled, onSelect }) => (
-    <label>
-        <select
-            value={selectedGoalkeeper ? selectedGoalkeeper.id : ''}
-            disabled={disabled}
-            onChange={(e) => onSelect(goalkeepers.find(p => p.id === parseInt(e.target.value)) as Goalkeeper)}
-        >
-            {goalkeepers.map(player => (
-                <option key={player.id} value={player.id}>{player.name}</option>
-            ))}
-        </select>
-    </label>
-);
+export const GoalkeeperSelector: React.FC<GoalkeeperSelectorProps> = ({ text, selectedGoalkeeper, disabled, onSelect }) => {
+    const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
+
+    useEffect(() => {
+        if (selectedTeam) {
+            onSelect(selectedTeam.goalkeeper);
+        } else {
+            onSelect(null);
+        }
+    }, [selectedTeam, onSelect]);
+
+    return (
+        <div>
+            {!selectedGoalkeeper && (
+                <>
+                    {text}:
+                    <TeamSelector
+                        selectedTeam={selectedTeam}
+                        onSelect={setSelectedTeam}
+                        disabled={disabled || !!selectedTeam}
+                    />
+                </>
+            )}
+            {selectedTeam && (
+                <label>
+                    Selected goalkeeper: {selectedTeam.goalkeeper.name}
+                </label>
+            )}
+        </div>
+    );
+};

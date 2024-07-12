@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/SavingComponent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/generic/GoalKeeperSelector.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/records/savingOutcomes.ts" afterDir="false" />
+    <list default="true" id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="add out of bound, change selector, add accordeon, add last player touching ball">
+      <change afterPath="$PROJECT_DIR$/src/components/generic/TeamSelector.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/outcomes/OutOfBoundsBallComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/PassingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PassingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PlayerSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/PlayerSelector.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SavingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SavingComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/generic/Accordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/Accordion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/generic/GoalKeeperSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/GoalKeeperSelector.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/generic/PlayerSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/PlayerSelector.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/outcomes/DeflectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/DeflectionComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/outcomes/FoulComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/FoulComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/outcomes/InjuryComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/InjuryComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/outcomes/HeadedClearanceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/HeadedClearanceComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/records/deflectionOutcomes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/records/deflectionOutcomes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/records/foulOutcomes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/records/foulOutcomes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/types/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/enums.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utility/sharedFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/sharedFunctions.ts" afterDir="false" />
     </list>
     <list id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,6 +69,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Mine\football-app\src\components\generic" />
+      <recent name="C:\Mine\football-app\src\components\outcomes" />
       <recent name="C:\Mine\football-app\src\records" />
       <recent name="C:\Mine\football-app\src\components" />
     </key>
@@ -105,7 +112,11 @@
       <option name="presentableId" value="Default" />
       <updated>1718808900929</updated>
       <workItem from="1718808903287" duration="83398000" />
-      <workItem from="1719219583211" duration="1251000" />
+      <workItem from="1719219583211" duration="1916000" />
+      <workItem from="1719664989048" duration="18711000" />
+      <workItem from="1719822069190" duration="1801000" />
+      <workItem from="1719911806373" duration="572000" />
+      <workItem from="1720786896946" duration="15388000" />
     </task>
     <task id="LOCAL-00001" summary="init intellij project">
       <created>1718808973600</created>
@@ -170,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1719168174687</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add saving component and chart and field player and goalkeeper types">
+      <created>1719231165366</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1719231165366</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,6 +215,8 @@
     <MESSAGE value="add blocking component" />
     <MESSAGE value="Add accordion and outcome components + code refactoring +" />
     <MESSAGE value="fix add goalkeeper" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix add goalkeeper" />
+    <MESSAGE value="add saving component and chart and field player and goalkeeper types" />
+    <MESSAGE value="add out of bound, change selector, add accordeon, add last player touching ball" />
+    <option name="LAST_COMMIT_MESSAGE" value="add out of bound, change selector, add accordeon, add last player touching ball" />
   </component>
 </project>

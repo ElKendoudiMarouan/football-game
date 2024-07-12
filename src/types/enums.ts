@@ -10,6 +10,11 @@ export enum PlayerStat {
     Handling = "Handling",
 }
 
+export enum TeamType {
+    Home = "Home",
+    Visitor = "Visitor",
+}
+
 export enum ShotResult {
     GoalKick = 'Out (Goal Kick)',
     TopBar = 'Top Bar',
@@ -19,7 +24,25 @@ export enum ShotResult {
     Corner = 'Corner',
 }
 
-export enum DeflectionResult {
+export enum DeflectionType {
+    LooseBall = 'Loose ball',
+    RightBar = 'Right bar',
+    LeftBar = 'Left bar',
+    TopBar = 'Top bar',
+}
+
+export enum OutcomeResultType {
+    //Generic
+    Injury = "Injury",
+    LossOfBalance = "Loss of Balance",
+    GetAction = 'Gain Action Token',
+    BallInField = 'Ball still in field',
+
+    //Deflection
+    Deflection =  "Deflection",
+    ThrowIn = "ThrowIn",
+    GoalKick = "GoalKick",
+    Corner = 'Corner',
     Out = 'Out of closest line',
     TopLeft = 'Top Left (Cell 3)',
     Top = 'Top (Cell 4)',
@@ -30,26 +53,6 @@ export enum DeflectionResult {
     BottomLeft = 'Bottom Left (Cell 9)',
     Bottom = 'Bottom (Cell 10)',
     BottomRight = 'Bottom Right (Cell 11)',
-    Corner = 'Corner',
-    Goal = 'Goal',
-}
-
-export enum DeflectionType {
-    LooseBall = 'Loose ball',
-    RightBar = 'Right bar',
-    LeftBar = 'Left bar',
-    TopBar = 'Top bar',
-}
-
-
-export enum OutcomeResultType {
-    //Generic
-    Injury = "Injury",
-    Corner = "Corner",
-    Deflection =  "Deflection",
-    ThrowIn = "ThrowIn",
-    LossOfBalance = "Loss of Balance",
-    GetAction = 'Gain Action Token',
 
     //Block
     HandBall = "Hand Ball",
@@ -59,7 +62,7 @@ export enum OutcomeResultType {
     ControlledBall = "Controlled Ball",
 
     //Foul
-    Failed = 'Failed',
+    Failed = 'Failed', //TODO check more
     RedCard = 'Red Card',
     YellowCard = 'Yellow Card',
     Foul = 'Foul',

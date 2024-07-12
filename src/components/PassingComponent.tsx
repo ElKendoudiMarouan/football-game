@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PlayerSelector } from './generic/PlayerSelector';
 import {DeflectionComponent} from './outcomes/DeflectionComponent';
-import {FieldPlayer, Player, players} from '../types/types';
+import {FieldPlayer, Player} from '../types/types';
 import { MAX_DICE_VALUE, MIN_DICE_VALUE, rollDice} from '../utility/diceUtils';
 import {clampDiced} from '../utility/sharedFunctions';
 import {DeflectionType} from '../types/enums';
@@ -13,7 +13,7 @@ const MAX_HEADER_PASS_DISTANCE = 12;
 const PASS_TURN_PENALTY = 1;
 const HEADER_TURN_PENALTY = 2;
 
-const NORMAL_PASS_DISTANCE_COEFFICIENTS = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const NORMAL_PASS_DISTANCE_COEFFICIENTS = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10]; //TODO change to quadrons
 const HEADER_PASS_DISTANCE_COEFFICIENTS = [2, 3, 4, 5, 6];
 
 const adjustDistance = (distance: number, isHeader: boolean, didTurn: boolean) => {
@@ -70,7 +70,7 @@ const calculateResult = (
 };
 
 export const PassingComponent: React.FC = () => {
-    const [selectedPlayer, setSelectedPlayer] = useState<FieldPlayer | null>(players[0]);
+    const [selectedPasser, setSelectedPasser] = useState<FieldPlayer | null>(null);
     const [distance, setDistance] = useState<number>(1);
     const [isHeader, setIsHeader] = useState<boolean>(false);
     const [didTurn, setDidTurn] = useState<boolean>(false);
@@ -84,8 +84,8 @@ export const PassingComponent: React.FC = () => {
     };
 
     const handleCalculate = () => {
-        if (diceRoll !== null && selectedPlayer !== null) {
-            const result = calculateResult(selectedPlayer, distance, isHeader, didTurn, diceRoll);
+        if (diceRoll !== null && selectedPasser !== null) {
+            const result = calculateResult(selectedPasser, distance, isHeader, didTurn, diceRoll);
             setCalculation(result);
         }
     };
@@ -93,9 +93,11 @@ export const PassingComponent: React.FC = () => {
     return (
         <div>
             <h2>Passing Component</h2>
-            <PlayerSelector players={players}  disabled={calculation !== null} selectedPlayer={selectedPlayer} onSelect={setSelectedPlayer} />
+            <div>
+                Passer: <PlayerSelector text={'Select Passer'} disabled={calculation !== null} selectedPlayer={selectedPasser} onSelect={setSelectedPasser} />
+            </div>
             <br/>
-            <button onClick={handleRollDice}>Roll Dice</button>
+            <button onClick={handleRollDice} disabled={!selectedPasser}>Roll Dice</button>
             {diceRoll !== null && (
                 <>
                     <p>Dice Roll: {diceRoll}</p>
@@ -145,6 +147,7 @@ export const PassingComponent: React.FC = () => {
                                     {!calculation.passSuccessful && (
                                         <DeflectionComponent
                                             deflectionDistance={calculation.deflectionDistance}
+                                            lastPlayerTouchingBall={selectedPasser!}
                                             deflectionType={DeflectionType.LooseBall}
                                         />
                                     )}

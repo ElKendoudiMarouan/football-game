@@ -1,9 +1,15 @@
 import React from 'react';
-import {Player} from '../../types/types';
+import {FieldPlayer, Player} from '../../types/types';
 import {DeflectionType} from '../../types/enums';
 import {DeflectionComponent} from './DeflectionComponent';
 
-export const HeadedClearanceComponent: React.FC<{ defender: Player, threshold: number }> = ({ defender, threshold }) => {
+type HeadedClearanceProps = {
+    defender: Player,
+    threshold: number,
+    lastPlayerTouchingBall: FieldPlayer;
+};
+
+export const HeadedClearanceComponent: React.FC<HeadedClearanceProps> = ({ defender, threshold, lastPlayerTouchingBall }) => {
     const success = defender.Header >= threshold;
     return (
         <div>
@@ -12,7 +18,10 @@ export const HeadedClearanceComponent: React.FC<{ defender: Player, threshold: n
             {success ? (
                 <>
                     <p>The result is Deflection.</p>
-                    <DeflectionComponent  deflectionType={DeflectionType.LooseBall}/>
+                    <DeflectionComponent
+                        deflectionType={DeflectionType.LooseBall}
+                        lastPlayerTouchingBall={lastPlayerTouchingBall}
+                    />
                 </>
             ) : <p>The headed clearance failed.</p>}
         </div>

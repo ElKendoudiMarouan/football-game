@@ -5,8 +5,8 @@ import ShootingComponent from '../ShootingComponent';
 import {DeflectionComponent} from '../outcomes/DeflectionComponent';
 import BlockingComponent from '../BlockingComponent';
 import FoulComponent from '../outcomes/FoulComponent';
-import {DeflectionType} from '../../types/enums';
-import {SavingComponent} from '../SavingComponent'; // Assuming you have your SASS styles in this file
+import {SavingComponent} from '../SavingComponent';
+import OutOfBoundsBallComponent from '../outcomes/OutOfBoundsBallComponent'; // Assuming you have your SASS styles in this file
 
 type AccordionProps = {
     title?: string;
@@ -44,13 +44,14 @@ const AccordionGroup = () => {
         { title: 'Deflection', content: <DeflectionComponent/> },
         { title: 'Blocking', content: <BlockingComponent/> },
         { title: 'Saving', content: <SavingComponent/> },
-        { title: 'Foul', content: <FoulComponent/> },
+        { title: 'Fouling', content: <FoulComponent/> },
+        { title: 'Out Of Bounds', content: <OutOfBoundsBallComponent ballPositionUnknown={true}/> },
     ];
 
     return (
         <div>
-            {accordions.map((accordion, index) => (
-                <Accordion key={index} title={accordion.title} content={accordion.content} />
+            {accordions.map((accordion) => (
+                <Accordion key={accordion.title} title={accordion.title} content={accordion.content} />
             ))}
         </div>
     );

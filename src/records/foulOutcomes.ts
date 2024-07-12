@@ -13,17 +13,22 @@ const rawFoulResults : Record<string, OutcomeChartElement>  = {
         text: "The player receives a yellow card for the foul.",
         results: [{ type: OutcomeResultType.YellowCard }, { type: OutcomeResultType.Foul }]
     },
+    "4": {
+        title: "Yellow Card, No Foul",
+        text: "No foul, but the player argues with referee and gets a yellow card.",
+        results: [{ type: OutcomeResultType.RedCard }]
+    },
     "6, 7, 8, 9": {
         title: "No Card",
         text: "The player does not receive a card for the foul.",
         results: [{ type: OutcomeResultType.Foul }]
     },
     "10": {
-        title: "Red Card, New Foul",
+        title: "Red Card, No Foul",
         text: "No foul, but the player hits another player and gets a red card.",
         results: [{ type: OutcomeResultType.RedCard }]
     },
-    "4, 11, 12": {
+    "11, 12": {
         title: "VAR Overturns Foul",
         text: "VAR overturns the fault decision. No Fault",
         results: [{ type: OutcomeResultType.NoFoul }]

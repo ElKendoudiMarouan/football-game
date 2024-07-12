@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PlayerSelector } from './generic/PlayerSelector';
 import { rollDice } from '../utility/diceUtils';
-import { players, goalKeepers, FieldPlayer, Goalkeeper, OutcomeChartElement } from '../types/types';
+import { FieldPlayer, Goalkeeper, OutcomeChartElement } from '../types/types';
 import {DeflectionType, OutcomeResultType} from '../types/enums';
 import { SAVING_OUTCOMES } from '../records/savingOutcomes';
 import { DeflectionComponent } from './outcomes/DeflectionComponent';
@@ -23,8 +23,8 @@ const calculateSaveResult = (goalkeeper: Goalkeeper, attacker: FieldPlayer, dice
 };
 
 export const SavingComponent: React.FC<SavingComponentProps> = ({ attacker: initialAttacker, goalkeeper: initialGoalkeeper, goalkeeperFalling: initialGoalkeeperFalling }) => {
-    const [attacker, setAttacker] = useState<FieldPlayer>(initialAttacker || players[0]);
-    const [goalkeeper, setGoalkeeper] = useState<Goalkeeper>(initialGoalkeeper || goalKeepers[0]);
+    const [selectedAttacker, setSelectedAttacker] = useState<FieldPlayer | null>(initialAttacker || null);
+    const [selectedGoalkeeper, setSelectedGoalkeeper] = useState<Goalkeeper | null>(initialGoalkeeper || null);
     const [diceRoll, setDiceRoll] = useState<number | null>(null);
     const [goalKeeperDistance, setGoalKeeperDistance] = useState<number>(0);
     const [goalKeeperFalling, setGoalKeeperFalling] = useState<boolean>(!!initialGoalkeeperFalling);
@@ -44,7 +44,7 @@ export const SavingComponent: React.FC<SavingComponentProps> = ({ attacker: init
                 results: [{ type: OutcomeResultType.Goal }]
             });
         } else {
-            const { saveResult , outcome }= calculateSaveResult(goalkeeper, attacker, roll, goalKeeperDistance);
+            const { saveResult , outcome }= calculateSaveResult(selectedGoalkeeper!, selectedAttacker!, roll, goalKeeperDistance);
             setSaveOutcome(outcome);
             setSaveResult(saveResult);
         }
@@ -56,12 +56,12 @@ export const SavingComponent: React.FC<SavingComponentProps> = ({ attacker: init
             <>
                 {!initialAttacker && (
                     <div>
-                        Attacker : <PlayerSelector players={players} selectedPlayer={attacker} onSelect={setAttacker} />
+                        Attacker : <PlayerSelector text={'Select Shooter'} selectedPlayer={selectedAttacker} onSelect={setSelectedAttacker} />
                     </div>
                 )}
                 {!initialGoalkeeper && (
                     <div>
-                        Goalkeeper : <GoalkeeperSelector goalkeepers={goalKeepers} selectedGoalkeeper={goalkeeper} onSelect={setGoalkeeper} />
+                        Goalkeeper : <GoalkeeperSelector text={`Select Goalkeeper's team`} selectedGoalkeeper={selectedGoalkeeper} onSelect={setSelectedGoalkeeper} />
                     </div>
                 )}
                 <div>
@@ -81,14 +81,14 @@ export const SavingComponent: React.FC<SavingComponentProps> = ({ attacker: init
                     />
                 </div>
             </>
-            <button onClick={handleRollDice}>Roll Dice</button>
+            <button onClick={handleRollDice} disabled={!selectedAttacker && !selectedGoalkeeper}>Roll Dice</button>
             {diceRoll !== null && saveOutcome  && (
                 <>
                     <p>Dice Roll: {diceRoll}</p>
                     <>
                         {
                             saveResult !== null && (
-                                <p>Formula: {diceRoll} (Dice Roll) + {goalkeeper!.Saving} (Saving) - {goalKeeperDistance} (Distance) - {attacker!.Shooting} (Shooting) = {saveResult}</p>
+                                <p>Formula: {diceRoll} (Dice Roll) + {selectedGoalkeeper!.Saving} (Saving) - {goalKeeperDistance} (Distance) - {selectedAttacker!.Shooting} (Shooting) = {saveResult}</p>
                             )
                         }
                         <h3>{saveOutcome.title}</h3>
@@ -96,15 +96,15 @@ export const SavingComponent: React.FC<SavingComponentProps> = ({ attacker: init
                         {saveOutcome.results.map((result, index) => (
                             <div key={index}>
                                 {result.type === OutcomeResultType.Deflection && (
-                                    <DeflectionComponent deflectionType={DeflectionType.LooseBall} />
+                                    <DeflectionComponent deflectionType={DeflectionType.LooseBall} lastPlayerTouchingBall={selectedGoalkeeper! as FieldPlayer}/>
                                 )}
                                 {result.type === OutcomeResultType.Goal && <p>Goal!</p>}
-                                {result.type === OutcomeResultType.Injury && <InjuryComponent player={goalkeeper!} threshold={result.threshold!}/>}
+                                {result.type === OutcomeResultType.Injury && <InjuryComponent player={selectedGoalkeeper!} threshold={result.threshold!}/>}
                                 {result.type === OutcomeResultType.Corner && <p>Corner Kick!</p>}
                                 {result.type === OutcomeResultType.Catch && <p>Catch!</p>}
                                 {result.type === OutcomeResultType.Save && result.threshold && diceRoll !== null && (
                                     <p>
-                                        {diceRoll + goalkeeper!.Saving >= result.threshold ? "Save!" : "Goal!"}
+                                        {diceRoll + selectedGoalkeeper!.Saving >= result.threshold ? "Save!" : "Goal!"}
                                     </p>
                                 )}
                             </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PlayerSelector } from '../generic/PlayerSelector';
 import { rollDice } from '../../utility/diceUtils';
-import { players, Player, OutcomeChartElement } from '../../types/types';
+import { Player, OutcomeChartElement } from '../../types/types';
 import { FOUL_OUTCOMES } from '../../records/foulOutcomes';
 import { OutcomeResultType } from '../../types/enums';
 
@@ -42,7 +42,7 @@ const FoulComponent: React.FC<FoulComponentProps> = ({ player, isInsideGoalZone 
             {!selectedPlayer && (
                 <>
                     <h2>Foul Component</h2>
-                    <PlayerSelector players={players} selectedPlayer={selectedPlayer} onSelect={setSelectedPlayer} />
+                    <PlayerSelector text={'Select fouling player'} selectedPlayer={selectedPlayer} onSelect={setSelectedPlayer} disabled={foulOutcome !== null} />
                 </>
             )}
             { !isInsideGoalZone &&(

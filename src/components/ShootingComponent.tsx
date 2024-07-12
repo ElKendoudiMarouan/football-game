@@ -6,7 +6,7 @@ import {
     rollDice, SECOND_DICE_VALUE,
 } from '../utility/diceUtils';
 import { DeflectionComponent} from './outcomes/DeflectionComponent';
-import {FieldPlayer, players} from '../types/types';
+import {FieldPlayer} from '../types/types';
 import {DeflectionType, ShotResult} from '../types/enums';
 import {clampDiced} from '../utility/sharedFunctions';
 
@@ -85,7 +85,7 @@ const handleDeviation = (goalCellNumber: number, deviation: number): ShotResult 
     }
 };
 
-function checkOnTarget(result: number, goalCell: string) {
+function checkOnTarget(result: number, goalCell: string) { //TODO use outcomes chart
     let shotResult;
     let deviation;
     let originalGoalCellNumber;
@@ -104,7 +104,7 @@ function checkOnTarget(result: number, goalCell: string) {
 }
 
 export const ShootingComponent: React.FC = () => {
-    const [selectedPlayer, setSelectedPlayer] = useState<FieldPlayer | null>(players[0]);
+    const [selectedShooter, setSelectedShooter] = useState<FieldPlayer | null>(null);
     const [distance, setDistance] = useState<number>(10);
     const [isHeader, setIsHeader] = useState<boolean>(false);
     const [isInsideGoalZone, setIsInsideGoalZone] = useState<boolean>(false);
@@ -126,8 +126,8 @@ export const ShootingComponent: React.FC = () => {
     }, [isInsideGoalZone, distance]);
 
     const handleCalculate = () => {
-        if (diceRoll !== null && selectedPlayer !== null) {
-            const result = calculateShootingResult(selectedPlayer, distance, isHeader, isInsideGoalZone, didTurn, goalCell, diceRoll);
+        if (diceRoll !== null && selectedShooter !== null) {
+            const result = calculateShootingResult(selectedShooter, distance, isHeader, isInsideGoalZone, didTurn, goalCell, diceRoll);
             setCalculation(result);
         }
     };
@@ -135,9 +135,9 @@ export const ShootingComponent: React.FC = () => {
     return (
         <div>
             <h2>Shooting Component</h2>
-            <PlayerSelector players={players} disabled={calculation !== null} selectedPlayer={selectedPlayer} onSelect={setSelectedPlayer} />
+            <PlayerSelector text={'Select shooter'} disabled={calculation !== null} selectedPlayer={selectedShooter} onSelect={setSelectedShooter} />
             <br/>
-            <button onClick={handleRollDice}>Roll Dice</button>
+            <button onClick={handleRollDice} disabled={!selectedShooter}>Roll Dice</button>
             {diceRoll !== null && (
                 <>
                     <p>Dice Roll: {diceRoll}</p>
@@ -221,16 +221,19 @@ export const ShootingComponent: React.FC = () => {
                                             {calculation.shotResult === ShotResult.RightBar && (
                                                 <DeflectionComponent
                                                     deflectionType={DeflectionType.RightBar}
+                                                    lastPlayerTouchingBall={selectedShooter!}
                                                 />
                                             )}
                                             {calculation.shotResult === ShotResult.LeftBar && (
                                                 <DeflectionComponent
                                                     deflectionType={DeflectionType.LeftBar}
+                                                    lastPlayerTouchingBall={selectedShooter!}
                                                 />
                                             )}
                                             {calculation.shotResult === ShotResult.TopBar && (
                                                 <DeflectionComponent
                                                     deflectionType={DeflectionType.TopBar}
+                                                    lastPlayerTouchingBall={selectedShooter!}
                                                 />
                                             )}
                                         </>
