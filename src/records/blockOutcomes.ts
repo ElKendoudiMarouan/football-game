@@ -4,7 +4,7 @@ import {OutcomeChartElement} from '../types/types';
 export const BLOCK_OUTCOMES: Record<number, OutcomeChartElement> = {
     1: {
         title: "Hand Ball",
-        text: "A defender blocks a shot with their hand, resulting in a penalty for the opposing team.",
+        text: "A defender blocks the shot with their hand, resulting in a penalty for the opposing team.",
         results: [{ type: OutcomeResultType.HandBall }],
     },
     2: {

@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="add out of bound, change selector, add accordeon, add last player touching ball">
-      <change afterPath="$PROJECT_DIR$/src/components/generic/TeamSelector.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/outcomes/OutOfBoundsBallComponent.tsx" afterDir="false" />
+    <list default="true" id="acb7ef8e-862c-46bf-a61e-f821a9932d64" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/ui/PlayerSelectionUIComponent.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ui/PlayerSelectionUIComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RootComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/RootComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BlockingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PassingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PassingComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SavingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SavingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShootingComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/generic/Accordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/Accordion.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/generic/GoalKeeperSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/GoalKeeperSelector.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/generic/PlayerSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/generic/PlayerSelector.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/outcomes/DeflectionComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/DeflectionComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/outcomes/FoulComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/FoulComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/outcomes/HeadedClearanceComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/HeadedClearanceComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/records/deflectionOutcomes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/records/deflectionOutcomes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/records/foulOutcomes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/records/foulOutcomes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/outcomes/OutOfBoundsBallComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/outcomes/OutOfBoundsBallComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/records/blockOutcomes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/records/blockOutcomes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/routes-constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/routes-constants.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/types/enums.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/enums.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utility/sharedFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utility/sharedFunctions.ts" afterDir="false" />
     </list>
     <list id="6d904e1d-ac39-4942-a609-cc2fc5c68cf3" name="New changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +31,7 @@
       <list>
         <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="SCSS File" />
       </list>
     </option>
   </component>
@@ -62,6 +60,7 @@
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/generic" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Mine\football-app\node_modules\typescript\lib" />
     <property name="ts.rename.search.for.dynamic.occurrences" value="true" />
@@ -116,7 +115,7 @@
       <workItem from="1719664989048" duration="18711000" />
       <workItem from="1719822069190" duration="1801000" />
       <workItem from="1719911806373" duration="572000" />
-      <workItem from="1720786896946" duration="15388000" />
+      <workItem from="1720786896946" duration="21074000" />
     </task>
     <task id="LOCAL-00001" summary="init intellij project">
       <created>1718808973600</created>
@@ -188,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1719231165366</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="add out of bound, change selector, add accordeon, add last player touching ball">
+      <created>1720804421510</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1720804421510</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -29,8 +29,10 @@ const OutOfBoundsBallComponent: React.FC<OutOfBoundsBallComponentProps> = ({ typ
 
     const handleTypeChange = (type: OutcomeResultType) => {
         setSelectedType(type);
-        setButtonClicked(true)
+        setButtonClicked(true);
     };
+
+    const possibleOutcomes = [OutcomeResultType.GoalKick, OutcomeResultType.ThrowIn, OutcomeResultType.Corner];
 
     return (
         <div>
@@ -38,19 +40,17 @@ const OutOfBoundsBallComponent: React.FC<OutOfBoundsBallComponentProps> = ({ typ
                 <>
                     <PlayerSelector
                         text={'Last player touching ball'}
-                        selectedPlayer={selectedLastPlayerTouchingBall!} onSelect={setSelectedLastPlayerTouchingBall} disabled={selectedType !== null || selectedLastPlayerTouchingBall !== null}/>
+                        selectedPlayer={selectedLastPlayerTouchingBall!} onSelect={setSelectedLastPlayerTouchingBall} disabled={buttonClicked}/>
                 </>
             )}
             { (!lastPlayerTouchingBall || !type) && (
                 <>
                     { ballPositionUnknown && (
                         <>
-                            <button onClick={() => handleTypeChange(OutcomeResultType.BallInField)} disabled={selectedType !== null || selectedLastPlayerTouchingBall !== null}>Not Out</button>
+                            <button onClick={() => handleTypeChange(OutcomeResultType.BallInField)} disabled={!selectedLastPlayerTouchingBall || buttonClicked}>Not Out</button>
                         </>
                     )}
-                    <button onClick={() => handleTypeChange(OutcomeResultType.GoalKick)}  disabled={selectedType !== null || selectedLastPlayerTouchingBall !== null}>Goal Kick</button>
-                    <button onClick={() => handleTypeChange(OutcomeResultType.ThrowIn)} disabled={selectedType !== null || selectedLastPlayerTouchingBall !== null}>Throw In</button>
-                    <button onClick={() => handleTypeChange(OutcomeResultType.Corner)} disabled={selectedType !== null || selectedLastPlayerTouchingBall !== null}>Corner</button>
+                    { possibleOutcomes.map(outcome => <button key={outcome} onClick={() => handleTypeChange(outcome)}  disabled={!selectedLastPlayerTouchingBall || buttonClicked}>{outcome}</button>) }
                 </>
             )}
             {selectedType && selectedLastPlayerTouchingBall && (
@@ -58,7 +58,7 @@ const OutOfBoundsBallComponent: React.FC<OutOfBoundsBallComponentProps> = ({ typ
                     { selectedType === OutcomeResultType.BallInField ? (
                         <p>Ball is still in the field, continue playing</p>
                     ) : (
-                        <p>{selectedLastPlayerTouchingBall.name} from {findSelectedLastTeamTouchingBall(selectedLastPlayerTouchingBall).name} sent ball out, other team Benefits from a {selectedType}</p>
+                        <p>Player {selectedLastPlayerTouchingBall.name} from {findSelectedLastTeamTouchingBall(selectedLastPlayerTouchingBall).name} sent ball out, other team Benefits from a {selectedType}</p>
                     )}
                 </div>
             )}

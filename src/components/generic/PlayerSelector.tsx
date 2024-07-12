@@ -5,7 +5,7 @@ import {FieldPlayer, Team} from '../../types/types';
 type PlayerSelectorProps = {
     text: string;
     disabled?: boolean;
-    selectedPlayer: FieldPlayer | null; //TODO: add selected team
+    selectedPlayer: FieldPlayer | null;
     onSelect: (player: FieldPlayer) => void;
 };
 
@@ -31,7 +31,6 @@ export const PlayerSelector: React.FC<PlayerSelectorProps> = ({ text, selectedPl
             />
             {selectedTeam && (
                 <label>
-                    Select player:
                     <select
                         value={selectedPlayer ? selectedPlayer.id : ''}
                         disabled={disabled}

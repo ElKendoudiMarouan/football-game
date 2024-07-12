@@ -40,8 +40,8 @@ export enum OutcomeResultType {
 
     //Deflection
     Deflection =  "Deflection",
-    ThrowIn = "ThrowIn",
-    GoalKick = "GoalKick",
+    ThrowIn = "Throw In",
+    GoalKick = "Goal Kick",
     Corner = 'Corner',
     Out = 'Out of closest line',
     TopLeft = 'Top Left (Cell 3)',

@@ -27,8 +27,6 @@ J
 src/index.tsx,5\a\5ab44fe33ca96299f51ad4778a73e425b92bf439
 N
 src/resources/api-constants.ts,2\c\2c665bc38e3d2ffdc9b9b184bedc940ed17866dc
-Q
-!src/resources/routes-constants.ts,f\b\fb9969fe641814df62feef06c35f9214cf3039fc
 b
 2src/components/outcomes/LossOfBalanceComponent.tsx,c\5\c56f251788d40cc59bcfeb69ca90e08c71c2ede8
 Q
@@ -37,8 +35,6 @@ A
 src/setupTests.ts,3\9\39129446b425a1d640160c068e4194e96639eedf
 D
 src/serviceWorker.ts,4\7\47792f5c82626eae18ebb2b1a90ee940faa6e719
-E
-src/RootComponent.tsx,6\3\630442219f14b24a6c7a8b62fd34baf620d81b25
 F
 src/react-app-env.d.ts,4\a\4a7b99bdbee5792679d347b6474463bf5e14b66d
 @

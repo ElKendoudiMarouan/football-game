@@ -49,19 +49,19 @@ export const SavingComponent: React.FC<SavingComponentProps> = ({ attacker: init
             setSaveResult(saveResult);
         }
     };
-
+        //TODO select goalkeeper automatically just by selecting attacker? (except in deflcetion)
     return (
         <div>
             <h2>Saving Component</h2>
             <>
                 {!initialAttacker && (
                     <div>
-                        Attacker : <PlayerSelector text={'Select Shooter'} selectedPlayer={selectedAttacker} onSelect={setSelectedAttacker} />
+                        <PlayerSelector text={'Select Shooter'} selectedPlayer={selectedAttacker} onSelect={setSelectedAttacker} />
                     </div>
                 )}
                 {!initialGoalkeeper && (
                     <div>
-                        Goalkeeper : <GoalkeeperSelector text={`Select Goalkeeper's team`} selectedGoalkeeper={selectedGoalkeeper} onSelect={setSelectedGoalkeeper} />
+                        <GoalkeeperSelector text={`Select Goalkeeper`} selectedGoalkeeper={selectedGoalkeeper} onSelect={setSelectedGoalkeeper} />
                     </div>
                 )}
                 <div>

@@ -96,7 +96,7 @@ export const DeflectionComponent: React.FC<DeflectionProps> = ({ deflectionDista
                             <OutOfBoundsBallComponent
                                 type={outcome === OutcomeResultType.Corner ? OutcomeResultType.Corner : undefined}
                                 lastPlayerTouchingBall = {selectedLastPlayerTouchingBall!}
-                                ballPositionUnknown = {outcome !== OutcomeResultType.Corner}
+                                ballPositionUnknown = {outcome !== OutcomeResultType.Corner && outcome !== OutcomeResultType.Out}
                             />
                         )
                     }

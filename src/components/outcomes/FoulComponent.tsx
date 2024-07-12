@@ -5,12 +5,12 @@ import { Player, OutcomeChartElement } from '../../types/types';
 import { FOUL_OUTCOMES } from '../../records/foulOutcomes';
 import { OutcomeResultType } from '../../types/enums';
 
-type FoulComponentProps = {
+type FoulingComponentProps = {
     player?: Player;
     isInsideGoalZone?: boolean;
 };
 
-const FoulComponent: React.FC<FoulComponentProps> = ({ player, isInsideGoalZone }) => {
+const FoulComponent: React.FC<FoulingComponentProps> = ({ player, isInsideGoalZone }) => {
     const [selectedPlayer, setSelectedPlayer] = useState<Player | null>(player || null);
     const [checkIsInsideGoalZone, setCheckIsInsideGoalZone] = useState<boolean>(false);
     const [diceRoll, setDiceRoll] = useState<number | null>(null);
@@ -39,7 +39,7 @@ const FoulComponent: React.FC<FoulComponentProps> = ({ player, isInsideGoalZone 
 
     return (
         <div>
-            {!selectedPlayer && (
+            {!player && (
                 <>
                     <h2>Foul Component</h2>
                     <PlayerSelector text={'Select fouling player'} selectedPlayer={selectedPlayer} onSelect={setSelectedPlayer} disabled={foulOutcome !== null} />
@@ -60,7 +60,7 @@ const FoulComponent: React.FC<FoulComponentProps> = ({ player, isInsideGoalZone 
                 )
             }
             <br/>
-            <button onClick={handleRollDice}>Roll Dice</button>
+            <button onClick={handleRollDice} disabled={!!diceRoll || !selectedPlayer}>Roll Dice</button>
             {diceRoll !== null && (
                 <>
                     <p>Dice Roll: {diceRoll}</p>

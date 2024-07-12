@@ -50,12 +50,8 @@ export const BlockingComponent: React.FC<BlockingComponentProps> = ({ attacker }
     const handleRollDice = () => {
         const roll = rollDice();
         setDiceRoll(roll);
-        setBlockResult(null);
-
-        if (selectedDefender && selectedAttacker ) {
-            const result = calculateBlockResult(selectedDefender, selectedAttacker, roll);
-            setBlockResult(result);
-        }
+        const result = calculateBlockResult(selectedDefender!, selectedAttacker!, roll);
+        setBlockResult(result);
     };
 
     return (
@@ -66,8 +62,8 @@ export const BlockingComponent: React.FC<BlockingComponentProps> = ({ attacker }
                 <PlayerSelector text={'Select Shooter'} selectedPlayer={selectedAttacker} onSelect={setSelectedAttacker} disabled={blockResult !== null}/>
             )}
             <br/>
-            <button onClick={handleRollDice}>Roll Dice</button>
-            {diceRoll !== null && blockResult != null && (
+            <button onClick={handleRollDice} disabled={!!blockResult || !(selectedDefender && selectedAttacker) }>Roll Dice</button>
+            { blockResult && (
                 <>
                     <p>Dice Roll: {diceRoll}</p>
                     { blockResult.formula && blockResult.calculationResult && (

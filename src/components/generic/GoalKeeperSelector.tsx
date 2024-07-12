@@ -8,7 +8,7 @@ type GoalkeeperSelectorProps = {
     disabled?: boolean;
     onSelect: (goalkeeper: Goalkeeper | null) => void;
 };
-
+//todo fix bug field disappearing
 export const GoalkeeperSelector: React.FC<GoalkeeperSelectorProps> = ({ text, selectedGoalkeeper, disabled, onSelect }) => {
     const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
 
