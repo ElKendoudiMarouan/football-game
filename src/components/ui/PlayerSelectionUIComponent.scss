@@ -1,5 +1,5 @@
 .pitch {
-  background: #5d9634 linear-gradient(to bottom, #5d9634, #5d9634 50%, #538c2b 50%, #538c2b);
+  background: #10a501 linear-gradient(to bottom, #10a501, #10a501 50%, #009106 50%, #009106);
   background-size: 100% 20vmin; //todo apply to container
   padding: 1vmin;
 }
@@ -41,6 +41,7 @@
   text-align: center;
   text-shadow: 0 0 1px #fff;
   top: 0;
+  z-index: 1;
 }
 
 .container li .number:before {
@@ -53,6 +54,7 @@
   transform: rotate(60deg);
   transform-origin: top left;
   width: 2vmin;
+  z-index: 0;
 }
 
 .container li .number:after {
@@ -65,6 +67,7 @@
   transform: rotate(-60deg);
   transform-origin: top right;
   width: 2vmin;
+  z-index: 0;
 }
 
 li#goal  .number {

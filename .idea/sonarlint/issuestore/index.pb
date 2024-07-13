@@ -1,8 +1,6 @@
 
 @
 football-app.iml,c\3\c3fb682821461e883beb64f519780277a61f439b
-J
-src/pages/NotFoundPage.tsx,e\b\eb2e4660ef51c290bb2fc9e38d5b3c4c16409553
 Q
 !src/tests/pages/HomePage.test.tsx,3\b\3b088bf37ada03139a1513aaf79db4133a16b67d
 U

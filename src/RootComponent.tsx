@@ -5,6 +5,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import { ROUTES } from './resources/routes-constants'
 import './styles/main.sass'
 import PlayerSelectionUIComponent from './components/ui/PlayerSelectionUIComponent';
+import TerrainGridUIComponent from './components/ui/TerrainGridUIComponent';
 
 const RootComponent: React.FC = () => {
     return (
@@ -13,6 +14,7 @@ const RootComponent: React.FC = () => {
                 <Route path="*" element={<NotFoundPage />} />
                 <Route path={ROUTES.HOMEPAGE_ROUTE} element={<HomePage />} />
                 <Route path={ROUTES.PLAYER_SELECTOR_ROUTE} element={<PlayerSelectionUIComponent />} />
+                <Route path={ROUTES.GRID_ROUTE} element={<TerrainGridUIComponent />} />
             </Routes>
         </Router>
     )
