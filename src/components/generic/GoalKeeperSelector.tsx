@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { Goalkeeper, Team } from '../../types/types';
+import {Player, Team} from '../../types/types';
 import { TeamSelector } from './TeamSelector';
 
 type GoalkeeperSelectorProps = {
     text: string;
-    selectedGoalkeeper: Goalkeeper | null;
+    selectedGoalkeeper: Player | null; //bad practice
+    team?: Team; //TODO pass this
     disabled?: boolean;
-    onSelect: (goalkeeper: Goalkeeper | null) => void;
+    onSelect: (goalkeeper: Player | null) => void;
 };
-//todo fix bug field disappearing
-export const GoalkeeperSelector: React.FC<GoalkeeperSelectorProps> = ({ text, selectedGoalkeeper, disabled, onSelect }) => {
-    const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
+
+export const GoalkeeperSelector: React.FC<GoalkeeperSelectorProps> = ({ text,selectedGoalkeeper, team, disabled, onSelect }) => {
+    const [selectedTeam, setSelectedTeam] = useState<Team | null>(team || null);
 
     useEffect(() => {
         if (selectedTeam) {
-            onSelect(selectedTeam.goalkeeper);
+            onSelect(selectedTeam.players.find(p => p.isGoalKeeper)!);
         } else {
             onSelect(null);
         }
@@ -22,19 +23,19 @@ export const GoalkeeperSelector: React.FC<GoalkeeperSelectorProps> = ({ text, se
 
     return (
         <div>
-            {!selectedGoalkeeper && (
+            {!team && (
                 <>
                     {text}:
                     <TeamSelector
                         selectedTeam={selectedTeam}
                         onSelect={setSelectedTeam}
-                        disabled={disabled || !!selectedTeam}
+                        disabled={disabled}
                     />
                 </>
             )}
-            {selectedTeam && (
+            {selectedTeam && selectedGoalkeeper && (
                 <label>
-                    Selected goalkeeper: {selectedTeam.goalkeeper.name}
+                    Selected goalkeeper: {selectedGoalkeeper.name}
                 </label>
             )}
         </div>

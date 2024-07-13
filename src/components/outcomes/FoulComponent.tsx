@@ -39,12 +39,12 @@ const FoulComponent: React.FC<FoulingComponentProps> = ({ player, isInsideGoalZo
 
     return (
         <div>
-            {!player && (
+            {!player ? (
                 <>
                     <h2>Foul Component</h2>
                     <PlayerSelector text={'Select fouling player'} selectedPlayer={selectedPlayer} onSelect={setSelectedPlayer} disabled={foulOutcome !== null} />
                 </>
-            )}
+            ) : <h4>Foul</h4>}
             { !isInsideGoalZone &&(
                     <>
                         <br />
@@ -60,10 +60,10 @@ const FoulComponent: React.FC<FoulingComponentProps> = ({ player, isInsideGoalZo
                 )
             }
             <br/>
-            <button onClick={handleRollDice} disabled={!!diceRoll || !selectedPlayer}>Roll Dice</button>
+            <button onClick={handleRollDice} disabled={!!diceRoll || !selectedPlayer}>Roll Dice 🎲</button>
             {diceRoll !== null && (
                 <>
-                    <p>Dice Roll: {diceRoll}</p>
+                    <p>🎲 Dice Roll: {diceRoll}</p>
                     {foulOutcome && (
                         <>
                             <h3>{foulOutcome.title}</h3>

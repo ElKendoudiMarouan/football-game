@@ -1,11 +1,12 @@
 import React, {useCallback, useState} from 'react';
-import {FieldPlayer, matchData} from '../../types/types';
+import {matchData} from '../../data/players';
+import {Player} from '../../types/types';
 import {OutcomeResultType} from '../../types/enums';
 import {PlayerSelector} from '../generic/PlayerSelector';
 
 type OutOfBoundsBallComponentProps = {
     type?: OutcomeResultType;
-    lastPlayerTouchingBall?: FieldPlayer;
+    lastPlayerTouchingBall?: Player;
     ballPositionUnknown?: boolean;
 };
 
@@ -18,11 +19,11 @@ type OutOfBoundsBallComponentProps = {
  * OutcomeResultType.GoalKick
  */
 const OutOfBoundsBallComponent: React.FC<OutOfBoundsBallComponentProps> = ({ type, lastPlayerTouchingBall, ballPositionUnknown }) => {
-    const [selectedType, setSelectedType] = useState<OutcomeResultType | null>(type || null); //TODO bugg if type passed and not player (excpected)
-    const [selectedLastPlayerTouchingBall, setSelectedLastPlayerTouchingBall] = useState<FieldPlayer | null>(lastPlayerTouchingBall || null);
-    const [buttonClicked, setButtonClicked] = useState<boolean>(false);//todo add behavior for when type passed (button don't need to be clicked)
+    const [selectedType, setSelectedType] = useState<OutcomeResultType | null>(type || null);
+    const [selectedLastPlayerTouchingBall, setSelectedLastPlayerTouchingBall] = useState<Player | null>(lastPlayerTouchingBall || null);
+    const [buttonClicked, setButtonClicked] = useState<boolean>(false);
 
-    const findSelectedLastTeamTouchingBall = useCallback((player: FieldPlayer) => {
+    const findSelectedLastTeamTouchingBall = useCallback((player: Player) => {
         return matchData.teams.find(team => team.type === player?.team)!;
     }, [selectedLastPlayerTouchingBall, matchData.teams]);
 
@@ -32,7 +33,8 @@ const OutOfBoundsBallComponent: React.FC<OutOfBoundsBallComponentProps> = ({ typ
         setButtonClicked(true);
     };
 
-    const possibleOutcomes = [OutcomeResultType.GoalKick, OutcomeResultType.ThrowIn, OutcomeResultType.Corner];
+    const possibleOutcomes = [OutcomeResultType.GoalKick, OutcomeResultType.ThrowIn, OutcomeResultType.Corner]
+        .filter(outcome => outcome || type === outcome);
 
     return (
         <div>
@@ -43,7 +45,7 @@ const OutOfBoundsBallComponent: React.FC<OutOfBoundsBallComponentProps> = ({ typ
                         selectedPlayer={selectedLastPlayerTouchingBall!} onSelect={setSelectedLastPlayerTouchingBall} disabled={buttonClicked}/>
                 </>
             )}
-            { (!lastPlayerTouchingBall || !type) && (
+            { !type && (
                 <>
                     { ballPositionUnknown && (
                         <>
@@ -58,7 +60,10 @@ const OutOfBoundsBallComponent: React.FC<OutOfBoundsBallComponentProps> = ({ typ
                     { selectedType === OutcomeResultType.BallInField ? (
                         <p>Ball is still in the field, continue playing</p>
                     ) : (
-                        <p>Player {selectedLastPlayerTouchingBall.name} from {findSelectedLastTeamTouchingBall(selectedLastPlayerTouchingBall).name} sent ball out, other team Benefits from a {selectedType}</p>
+                        <>
+                            <h4>{selectedType}</h4>
+                            <p>Player {selectedLastPlayerTouchingBall.name} from team {findSelectedLastTeamTouchingBall(selectedLastPlayerTouchingBall).name} sent ball out, other team Benefits from a {selectedType}</p>
+                        </>
                     )}
                 </div>
             )}

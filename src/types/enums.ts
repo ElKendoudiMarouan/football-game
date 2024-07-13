@@ -35,7 +35,6 @@ export enum OutcomeResultType {
     //Generic
     Injury = "Injury",
     LossOfBalance = "Loss of Balance",
-    GetAction = 'Gain Action Token',
     BallInField = 'Ball still in field',
 
     //Deflection
@@ -58,11 +57,10 @@ export enum OutcomeResultType {
     HandBall = "Hand Ball",
     BallToShooter = "Ball to Shooter",
     HeadedClearance = "Headed Clearance",
-    BallToGoalkeeper = "Ball to Goalkeeper",
     ControlledBall = "Controlled Ball",
 
     //Foul
-    Failed = 'Failed', //TODO check more
+    BlockFailed = 'Block Failed',
     RedCard = 'Red Card',
     YellowCard = 'Yellow Card',
     Foul = 'Foul',
@@ -70,8 +68,7 @@ export enum OutcomeResultType {
     FreeKick = 'Free Kick',
     NoFoul = 'No Foul',
 
-    //Save
+    //Goalkeeper Save
     Goal = 'Goal',
-    Save = 'Save',
     Catch = 'Catch',
 }

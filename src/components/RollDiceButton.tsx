@@ -5,5 +5,5 @@ type RollDiceButtonProps = { //nOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 };
 
 export const RollDiceButton: React.FC<RollDiceButtonProps> = ({ onRoll }) => (
-    <button onClick={onRoll}>Roll Dice</button>
+    <button onClick={onRoll}>Roll Dice 🎲</button>
 );

@@ -5,7 +5,7 @@ export const SAVING_OUTCOMES: Record<number, OutcomeChartElement> = {
     1: {
         title: "Hit Post",
         text: "The goalkeeper hits the post and may get injured.",
-        results: [{ type: OutcomeResultType.Injury, threshold: 7, statName: PlayerStat.Physique }]
+        results: [{ type: OutcomeResultType.Injury, threshold: 7, statName: PlayerStat.Physique }, { type: OutcomeResultType.Goal}]
     },
     2: {
         title: "Misjudgment",
@@ -20,7 +20,7 @@ export const SAVING_OUTCOMES: Record<number, OutcomeChartElement> = {
     4: {
         title: "Fingertip Deflection",
         text: "The goalkeeper gets a fingertip to the ball. Will it be a corner?",
-        results: [{ type: OutcomeResultType.Save, threshold: 8, statName: PlayerStat.Shooting }, { type: OutcomeResultType.Corner }]
+        results: [{ type: OutcomeResultType.Deflection, threshold: 8, statName: PlayerStat.Saving, consequence: OutcomeResultType.Goal }]
     },
     5: {
         title: "Butterfingers",
@@ -30,22 +30,22 @@ export const SAVING_OUTCOMES: Record<number, OutcomeChartElement> = {
     6: {
         title: "Reflex Save",
         text: "A brilliant reflex save! Will it result in a corner?",
-        results: [{ type: OutcomeResultType.Save, threshold: 8, statName: PlayerStat.Shooting }, { type: OutcomeResultType.Corner }]
+        results: [{ type: OutcomeResultType.Deflection, threshold: 8, statName: PlayerStat.Saving, consequence: OutcomeResultType.Goal }]
     },
     7: {
         title: "Tip Over the Bar",
         text: "The goalkeeper tips the ball over the bar. Will it be a save?",
-        results: [{ type: OutcomeResultType.Save, threshold: 6, statName: PlayerStat.Shooting }, { type: OutcomeResultType.Deflection }]
+        results: [{ type: OutcomeResultType.Corner, threshold: 6, statName: PlayerStat.Saving, consequence: OutcomeResultType.Goal }]
     },
     8: {
         title: "Block Save",
         text: "The goalkeeper blocks the ball. Will it be a deflection?",
-        results: [{ type: OutcomeResultType.Save, threshold: 4, statName: PlayerStat.Shooting }, { type: OutcomeResultType.Deflection }]
+        results: [{ type: OutcomeResultType.Deflection, threshold: 4, statName: PlayerStat.Saving, consequence: OutcomeResultType.Goal }]
     },
     9: {
         title: "One-Handed Save",
         text: "A one-handed save! Will it be a deflection or a catch?",
-        results: [{ type: OutcomeResultType.Catch, threshold: 8, statName: PlayerStat.Defense }, { type: OutcomeResultType.Deflection }]
+        results: [{ type: OutcomeResultType.Catch, threshold: 8, statName: PlayerStat.Handling, consequence: OutcomeResultType.Deflection }]
     },
     10: {
         title: "Fumble",
@@ -55,7 +55,7 @@ export const SAVING_OUTCOMES: Record<number, OutcomeChartElement> = {
     11: {
         title: "Diving Save",
         text: "A diving save! Will it be a catch or a corner?",
-        results: [{ type: OutcomeResultType.Catch, threshold: 5, statName: PlayerStat.Defense }, { type: OutcomeResultType.Corner }]
+        results: [{ type: OutcomeResultType.Catch, threshold: 5, statName: PlayerStat.Handling, consequence: OutcomeResultType.Corner }]
     },
     12: {
         title: "Smother",

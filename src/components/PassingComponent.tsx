@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PlayerSelector } from './generic/PlayerSelector';
 import {DeflectionComponent} from './outcomes/DeflectionComponent';
-import {FieldPlayer, Player} from '../types/types';
+import {Player} from '../types/types';
 import { MAX_DICE_VALUE, MIN_DICE_VALUE, rollDice} from '../utility/diceUtils';
 import {clampDiced} from '../utility/sharedFunctions';
 import {DeflectionType} from '../types/enums';
@@ -70,7 +70,7 @@ const calculateResult = (
 };
 
 export const PassingComponent: React.FC = () => {
-    const [selectedPasser, setSelectedPasser] = useState<FieldPlayer | null>(null);
+    const [selectedPasser, setSelectedPasser] = useState<Player | null>(null);
     const [distance, setDistance] = useState<number>(1);
     const [isHeader, setIsHeader] = useState<boolean>(false);
     const [didTurn, setDidTurn] = useState<boolean>(false);
@@ -97,10 +97,10 @@ export const PassingComponent: React.FC = () => {
                 Passer: <PlayerSelector text={'Select Passer'} disabled={calculation !== null} selectedPlayer={selectedPasser} onSelect={setSelectedPasser} />
             </div>
             <br/>
-            <button onClick={handleRollDice} disabled={!selectedPasser}>Roll Dice</button>
+            <button onClick={handleRollDice} disabled={!selectedPasser}>Roll Dice 🎲</button>
             {diceRoll !== null && (
                 <>
-                    <p>Dice Roll: {diceRoll}</p>
+                    <p>🎲 Dice Roll: {diceRoll}</p>
                     {diceRoll === MIN_DICE_VALUE ? (
                         <p>Pass Failed</p>
                     ) : diceRoll === MAX_DICE_VALUE  ? (
@@ -137,7 +137,7 @@ export const PassingComponent: React.FC = () => {
                                 />
                             </label>
                             <br />
-                            <button onClick={handleCalculate} disabled={calculation !== null}>Calculate</button>
+                            <button onClick={handleCalculate} disabled={calculation !== null}>Calculate 🧮</button>
                             {calculation && (
                                 <div>
                                     <h3>Result</h3>

@@ -1,5 +1,6 @@
 import React from 'react';
-import {matchData, Team} from '../../types/types';
+import {matchData} from '../../data/players';
+import {Team} from '../../types/types';
 
 type TeamSelectorProps = {
     selectedTeam: Team | null;

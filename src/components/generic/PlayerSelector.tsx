@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { TeamSelector } from './TeamSelector';
-import {FieldPlayer, Team} from '../../types/types';
+import {Player, Team} from '../../types/types';
 
 type PlayerSelectorProps = {
     text: string;
     disabled?: boolean;
-    selectedPlayer: FieldPlayer | null;
-    onSelect: (player: FieldPlayer) => void;
+    selectedPlayer: Player | null;
+    onSelect: (player: Player) => void;
 };
 
 export const PlayerSelector: React.FC<PlayerSelectorProps> = ({ text, selectedPlayer, disabled, onSelect }) => {
     const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
-    const [availablePlayers, setAvailablePlayers] = useState<FieldPlayer[]>([]);
+    const [availablePlayers, setAvailablePlayers] = useState<Player[]>([]);
 
     useEffect(() => {
         if (selectedTeam) {
@@ -34,11 +34,11 @@ export const PlayerSelector: React.FC<PlayerSelectorProps> = ({ text, selectedPl
                     <select
                         value={selectedPlayer ? selectedPlayer.id : ''}
                         disabled={disabled}
-                        onChange={(e) => onSelect(availablePlayers.find(p => p.id === parseInt(e.target.value)) as FieldPlayer)}
+                        onChange={(e) => onSelect(availablePlayers.find(p => p.id === parseInt(e.target.value)) as Player)}
                     >
                         <option value="">Select Player</option>
                         {availablePlayers.map(player => (
-                            <option key={player.id} value={player.id}>{player.name}</option>
+                            <option key={player.id} value={player.id}>({player.number}) {player.name}</option>
                         ))}
                     </select>
                 </label>

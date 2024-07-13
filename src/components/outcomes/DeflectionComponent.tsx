@@ -3,13 +3,13 @@ import {MIN_DICE_VALUE, rollDice, SECOND_DICE_VALUE} from '../../utility/diceUti
 import {DeflectionType, OutcomeResultType} from '../../types/enums';
 import {DEFLECTION_OUTCOMES} from '../../records/deflectionOutcomes';
 import OutOfBoundsBallComponent from './OutOfBoundsBallComponent';
-import {FieldPlayer} from '../../types/types';
+import {Player} from '../../types/types';
 import {PlayerSelector} from '../generic/PlayerSelector';
 
 type DeflectionProps = {
     deflectionDistance?: number;
     deflectionType?: DeflectionType;
-    lastPlayerTouchingBall?: FieldPlayer;
+    lastPlayerTouchingBall?: Player;
 };
 
 /**
@@ -31,7 +31,7 @@ type DeflectionProps = {
 export const DeflectionComponent: React.FC<DeflectionProps> = ({ deflectionDistance, deflectionType, lastPlayerTouchingBall }) => {
     const [localDeflectionType, setLocalDeflectionType] = useState<DeflectionType>(deflectionType || DeflectionType.LooseBall);
     const [deflectionDirection, setDeflectionDirection] = useState<number | null>(null);
-    const [selectedLastPlayerTouchingBall, setSelectedLastPlayerTouchingBall] = useState<FieldPlayer | null>(lastPlayerTouchingBall || null);
+    const [selectedLastPlayerTouchingBall, setSelectedLastPlayerTouchingBall] = useState<Player | null>(lastPlayerTouchingBall || null);
     const [distanceRoll, setDistanceRoll] = useState<number | null>(null);
     const [outcome, setOutcome] = useState<OutcomeResultType | null>(null);
 
@@ -59,7 +59,7 @@ export const DeflectionComponent: React.FC<DeflectionProps> = ({ deflectionDista
 
     return (
         <div>
-            { !deflectionType && (
+            { !deflectionType ? (
                 <>
                     <h2>Deflection Component</h2>
                     { !lastPlayerTouchingBall && (
@@ -77,13 +77,13 @@ export const DeflectionComponent: React.FC<DeflectionProps> = ({ deflectionDista
                         </select>
                     </label>
                     <br />
-                    <button onClick={handleRollDiceDeflection} disabled={!selectedLastPlayerTouchingBall || !!deflectionDirection}>Roll Dice</button>
+                    <button onClick={handleRollDiceDeflection} disabled={!selectedLastPlayerTouchingBall || !!deflectionDirection}>Roll Dice 🎲</button>
                 </>
-            )}
+            ) : <h4>Deflection!</h4>}
             {deflectionDirection && (
                 <div>
                     {deflectionDistance && (<h4>{localDeflectionType} :</h4>)}
-                    <p>Deflection Direction Dice Roll: {deflectionDirection} </p>
+                    <p>🎲 Deflection Direction Dice Roll: {deflectionDirection} </p>
                     <p>Outcome: {outcome}</p>
                     {distanceRoll && (
                         <p>Deflection Distance Roll: {distanceRoll}</p>
@@ -92,7 +92,7 @@ export const DeflectionComponent: React.FC<DeflectionProps> = ({ deflectionDista
                         <p>Deflection Calculated Distance: {deflectionDistance}</p>
                     )}
                     {
-                        outcome !== OutcomeResultType.NoDeflection && (
+                        outcome !== OutcomeResultType.NoDeflection && (//todo add here deflection toward goal
                             <OutOfBoundsBallComponent
                                 type={outcome === OutcomeResultType.Corner ? OutcomeResultType.Corner : undefined}
                                 lastPlayerTouchingBall = {selectedLastPlayerTouchingBall!}

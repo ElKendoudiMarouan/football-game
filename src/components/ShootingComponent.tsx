@@ -6,9 +6,11 @@ import {
     rollDice, SECOND_DICE_VALUE,
 } from '../utility/diceUtils';
 import { DeflectionComponent} from './outcomes/DeflectionComponent';
-import {FieldPlayer} from '../types/types';
+import {Player} from '../types/types';
 import {DeflectionType, ShotResult} from '../types/enums';
 import {clampDiced} from '../utility/sharedFunctions';
+import BlockingComponent from './BlockingComponent';
+import {SavingComponent} from './SavingComponent';
 
 const MIN_SUCCESS_RESULT = 8;
 const TOP_BAR_RESULT = 3;
@@ -44,7 +46,7 @@ const getDistanceCoefficient = (distance: number, isHeader: boolean, isInsideGoa
 };
 
 const calculateShootingResult = (
-    player: FieldPlayer,
+    player: Player,
     distance: number,
     isHeader: boolean,
     isInsideGoalZone: boolean,
@@ -65,7 +67,7 @@ const calculateShootingResult = (
         deviation,
         formula: `Dice Roll (${diceRoll}) + ${isHeader ? 'Header' : 'Shooting'} Skill (${skillValue}) - Coefficient (${distanceCoeff}) = ${result} ${shotResult == ShotResult.OnTarget ? '≥' : '<'} ${MIN_SUCCESS_RESULT}`,
         deviationFormula: deviation && originalGoalCellNumber ? `Minimum result for success (${MIN_SUCCESS_RESULT}) - Shooting result ${result} = ${deviation} Cells to the ${deviationDirection(originalGoalCellNumber) == 1 ? 'left': 'right'}`: null,
-        coeffFormula: `Distance (${distance}) = Coefficient (${distanceCoeff})`
+        coeffFormula: `Distance (${distance}) → Coefficient (${distanceCoeff})`
     };
 };
 
@@ -103,8 +105,9 @@ function checkOnTarget(result: number, goalCell: string) { //TODO use outcomes c
     return { shotResult, deviation, originalGoalCellNumber };
 }
 
+//todo give cell of kick and cell of arrival and app will calculate it
 export const ShootingComponent: React.FC = () => {
-    const [selectedShooter, setSelectedShooter] = useState<FieldPlayer | null>(null);
+    const [selectedShooter, setSelectedShooter] = useState<Player | null>(null);
     const [distance, setDistance] = useState<number>(10);
     const [isHeader, setIsHeader] = useState<boolean>(false);
     const [isInsideGoalZone, setIsInsideGoalZone] = useState<boolean>(false);
@@ -112,6 +115,7 @@ export const ShootingComponent: React.FC = () => {
     const [goalCell, setGoalCell] = useState<string>('A');
     const [diceRoll, setDiceRoll] = useState<number | null>(null);
     const [calculation, setCalculation] = useState<any | null>(null);
+    const [goToSaving, setGoToSaving] = useState<boolean>(false);
 
     const handleRollDice = () => {
         const roll = rollDice();
@@ -135,16 +139,16 @@ export const ShootingComponent: React.FC = () => {
     return (
         <div>
             <h2>Shooting Component</h2>
-            <PlayerSelector text={'Select shooter'} disabled={calculation !== null} selectedPlayer={selectedShooter} onSelect={setSelectedShooter} />
+            <PlayerSelector text={'Select shooter'} disabled={diceRoll !== null} selectedPlayer={selectedShooter} onSelect={setSelectedShooter} />
             <br/>
-            <button onClick={handleRollDice} disabled={!selectedShooter}>Roll Dice</button>
+            <button onClick={handleRollDice} disabled={!selectedShooter}>Roll Dice 🎲</button> {/*TODO disable*/}
             {diceRoll !== null && (
                 <>
-                    <p>Dice Roll: {diceRoll}</p>
+                    <p>🎲 Dice Roll: {diceRoll}</p>
                     {diceRoll === MIN_DICE_VALUE || diceRoll === SECOND_DICE_VALUE  ? (
-                        <p>Shot Failed : {ShotResult.GoalKick}</p>
+                        <h4>Shot Failed : {ShotResult.GoalKick}</h4>
                     ) : diceRoll === MAX_DICE_VALUE ? (
-                        <p>Shot on target : ({ShotResult.OnTarget})</p>
+                        <h4>{ShotResult.OnTarget}</h4>
                     ) : (
                         <>
                             <br />
@@ -206,14 +210,13 @@ export const ShootingComponent: React.FC = () => {
                                 </select>
                             </label>
                             <br />
-                            <button onClick={handleCalculate} disabled={calculation !== null}>Calculate</button>
+                            <button onClick={handleCalculate} disabled={calculation !== null}>Calculate 🧮</button>
                             {calculation && (
                                 <div>
-                                    <h3>Result</h3>
                                     <p>Distance coefficient Formula: {calculation.coeffFormula}</p>
                                     <p>Shooting Formula: {calculation.formula}</p>
-                                    <p>Shot Successful: {calculation.shotResult === ShotResult.OnTarget ? 'Yes' : 'No' }, Result : {calculation.shotResult}</p>
-                                    {calculation.shotResult !== ShotResult.OnTarget  && (
+                                    <h4>{calculation.shotResult}</h4>
+                                    {calculation.shotResult !== ShotResult.OnTarget && (
                                         <>
                                         {calculation.deviation &&
                                             (<p>Deviation Formula: {calculation.deviationFormula}</p>)
@@ -239,6 +242,14 @@ export const ShootingComponent: React.FC = () => {
                                         </>
                                     )}
                                 </div>
+                            )}
+                        </>
+                    )}
+                    {(diceRoll === MAX_DICE_VALUE || (calculation?.shotResult === ShotResult.OnTarget)) && (
+                        <>
+                            <BlockingComponent attacker={selectedShooter!} setGoToSaving={setGoToSaving}/>
+                            {goToSaving && (
+                                <SavingComponent attacker={selectedShooter!} /> //todo set goalkeeper directly
                             )}
                         </>
                     )}

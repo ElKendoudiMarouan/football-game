@@ -1,12 +1,12 @@
 import React from 'react';
-import {FieldPlayer, Player} from '../../types/types';
+import {Player} from '../../types/types';
 import {DeflectionType} from '../../types/enums';
 import {DeflectionComponent} from './DeflectionComponent';
 
 type HeadedClearanceProps = {
     defender: Player,
     threshold: number,
-    lastPlayerTouchingBall: FieldPlayer;
+    lastPlayerTouchingBall: Player;
 };
 
 export const HeadedClearanceComponent: React.FC<HeadedClearanceProps> = ({ defender, threshold, lastPlayerTouchingBall }) => {
@@ -17,7 +17,6 @@ export const HeadedClearanceComponent: React.FC<HeadedClearanceProps> = ({ defen
             <p>Defender Header ({defender.Header}) {success ? '≥' : ' <'} Threshold ({threshold})</p>
             {success ? (
                 <>
-                    <p>The result is Deflection.</p>
                     <DeflectionComponent
                         deflectionType={DeflectionType.LooseBall}
                         lastPlayerTouchingBall={lastPlayerTouchingBall}

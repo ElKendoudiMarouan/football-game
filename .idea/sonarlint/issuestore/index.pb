@@ -27,10 +27,6 @@ J
 src/index.tsx,5\a\5ab44fe33ca96299f51ad4778a73e425b92bf439
 N
 src/resources/api-constants.ts,2\c\2c665bc38e3d2ffdc9b9b184bedc940ed17866dc
-b
-2src/components/outcomes/LossOfBalanceComponent.tsx,c\5\c56f251788d40cc59bcfeb69ca90e08c71c2ede8
-Q
-!src/components/RollDiceButton.tsx,2\c\2cb711bf1805f7ebfe47b1240e4837e0785f4cef
 A
 src/setupTests.ts,3\9\39129446b425a1d640160c068e4194e96639eedf
 D

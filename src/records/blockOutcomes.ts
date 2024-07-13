@@ -12,7 +12,7 @@ export const BLOCK_OUTCOMES: Record<number, OutcomeChartElement> = {
         text: "The defender loses balance, possibly due to a mistimed slide tackle, leading to a scoring opportunity for the opposition.",
         results: [
             { type: OutcomeResultType.LossOfBalance, threshold: 5, statName: PlayerStat.Physique },
-            { type: OutcomeResultType.Failed }
+            { type: OutcomeResultType.BlockFailed }
         ],
     },
     3: {
@@ -20,7 +20,7 @@ export const BLOCK_OUTCOMES: Record<number, OutcomeChartElement> = {
         text: "The defender sustains an injury while attempting to block or clear the ball, creating a defensive weakness.",
         results: [
             { type: OutcomeResultType.Injury, threshold: 4, statName: PlayerStat.Physique },
-            { type: OutcomeResultType.Failed }
+            { type: OutcomeResultType.BlockFailed }
         ],
     },
     4: {
@@ -31,15 +31,15 @@ export const BLOCK_OUTCOMES: Record<number, OutcomeChartElement> = {
     5: {
         title: "Ball missed",
         text: "The defender's attempt to clear the ball failed because he narrowly missed the ball.",
-        results: [{ type: OutcomeResultType.Failed }],
+        results: [{ type: OutcomeResultType.BlockFailed }],
     },
     6: {
         title: "Headed Clearance",
         text: "The defender uses their head to clear the ball away from the goal area, neutralizing the threat.",
         results: [
-            { type: OutcomeResultType.HeadedClearance, threshold: 7, statName: PlayerStat.Header  },
             { type: OutcomeResultType.LossOfBalance, threshold: 3, statName: PlayerStat.Physique },
-            ],
+            { type: OutcomeResultType.HeadedClearance, threshold: 7, statName: PlayerStat.Header  },
+        ],
     },
     7: {
         title: "Conceding a Corner",
@@ -67,15 +67,15 @@ export const BLOCK_OUTCOMES: Record<number, OutcomeChartElement> = {
         results: [
             { type: OutcomeResultType.LossOfBalance, threshold: 8, statName: PlayerStat.Physique },
             { type: OutcomeResultType.Injury, threshold: 5, statName: PlayerStat.Physique },
-            { type: OutcomeResultType.Failed }
+            { type: OutcomeResultType.BlockFailed }
         ],
     },
     11: {
-        title: "Ball to Goalkeeper",
+        title: "To Goalkeeper hands",
         text: "The defender deflects or directs the ball safely into the goalkeeper's hands.",
         results: [
-            { type: OutcomeResultType.BallToGoalkeeper },
-            { type: OutcomeResultType.LossOfBalance, threshold: 4, statName: PlayerStat.Physique }
+            { type: OutcomeResultType.LossOfBalance, threshold: 4, statName: PlayerStat.Physique },
+            { type: OutcomeResultType.Catch },
         ],
     },
     12: {
@@ -83,7 +83,6 @@ export const BLOCK_OUTCOMES: Record<number, OutcomeChartElement> = {
         text: "The defender intercepts the ball and initiates a counter-attack, turning defense into offense effectively.",
         results: [
             { type: OutcomeResultType.ControlledBall },
-            { type: OutcomeResultType.GetAction }
         ],
     },
 };
