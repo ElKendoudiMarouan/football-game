@@ -4,7 +4,14 @@
 
 A small react project to act as an helping tool to accelerate calculations for a football board game
 
+Main Interface:
 ![image](https://github.com/user-attachments/assets/5f22fcae-fabe-4ec2-a855-8d6e456c8ac2)
+
+Grid Demo:
+![image](https://github.com/user-attachments/assets/0a91203a-073e-4136-af46-935f65297197)
+
+Selector Demo:
+![image](https://github.com/user-attachments/assets/c7d752fe-a57d-43e0-9036-a72b926e42f7)
 
 
 <br />
