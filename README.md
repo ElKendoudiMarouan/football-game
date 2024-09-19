@@ -2,8 +2,7 @@
 
 <br />
 
-This is a blank README file that you can customize at your needs.\
-Describe your project, how it works and how to contribute to it.
+A small react project to act as an helping tool to accelerate calculations for a football board game
 
 <br />
 
