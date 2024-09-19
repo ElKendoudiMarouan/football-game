@@ -4,6 +4,9 @@
 
 A small react project to act as an helping tool to accelerate calculations for a football board game
 
+![image](https://github.com/user-attachments/assets/5f22fcae-fabe-4ec2-a855-8d6e456c8ac2)
+
+
 <br />
 
 # 🚀 Available Scripts
